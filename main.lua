@@ -7,7 +7,7 @@ wait(2)
 -- to go down it's positive
 -- vertical value = 3rd value in udim2
 
--- HORIZONTAL DISTANCE BETWEEN BUTTONS: 0,267
+-- HORIZONTAL DISTANCE BETWEEN BUTTONS: 0.267
 -- horizontal value = 1st value in udim2
 
 main_c00l_hax = Instance.new("ScreenGui")
@@ -87,7 +87,7 @@ output_textbox.Text = "Output"
 input_textbox = Instance.new("TextBox")
 input_textbox.Name = "input_textbox"
 input_textbox.Parent = main_frame
-input_textbox.BackgroundColor3 = Color3.fromRGB(18, 18, 18)
+input_textbox.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 input_textbox.BorderColor3 = Color3.fromRGB(255, 0, 0)
 input_textbox.BorderSizePixel = 1
 input_textbox.Position = UDim2.new(0.003, 0, 1.018, 0) -- {0.003, 0},{1.018, 0}
@@ -224,6 +224,78 @@ teleport_to_player_button.Text = "Teleport to player"
 teleport_to_player_button.TextColor3 = Color3.fromRGB(255, 255, 255)
 teleport_to_player_button.TextScaled = true
 
+bypassed_teleport_to_player_button = Instance.new("TextButton")
+bypassed_teleport_to_player_button.Name = "bypassed_teleport_to_player"
+bypassed_teleport_to_player_button.Parent = page1
+bypassed_teleport_to_player_button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+bypassed_teleport_to_player_button.BorderColor3 = Color3.fromRGB(255, 0, 0)
+bypassed_teleport_to_player_button.BorderSizePixel = 2
+bypassed_teleport_to_player_button.Position = UDim2.new(0.281, 0, 0.01, 0) -- {0.281, 0},{0.01, 0}
+bypassed_teleport_to_player_button.Size = UDim2.new(0, 110, 0, 38) -- {0, 110},{0, 38}
+bypassed_teleport_to_player_button.Text = "Bypassed teleport to player"
+bypassed_teleport_to_player_button.TextColor3 = Color3.fromRGB(255, 255, 255)
+bypassed_teleport_to_player_button.TextScaled = true
+
+enable_collision_button = Instance.new("TextButton")
+enable_collision_button.Name = "enable_collision"
+enable_collision_button.Parent = page1
+enable_collision_button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+enable_collision_button.BorderColor3 = Color3.fromRGB(0, 0, 255)
+enable_collision_button.BorderSizePixel = 2
+enable_collision_button.Position = UDim2.new(0.281, 0, 0.77, 0) -- {0.281, 0},{0.77, 0}
+enable_collision_button.Size = UDim2.new(0, 110, 0, 38) -- {0, 110},{0, 38}
+enable_collision_button.Text = "Enable collision"
+enable_collision_button.TextColor3 = Color3.fromRGB(255, 255, 255)
+enable_collision_button.TextScaled = true
+
+disable_collision_button = Instance.new("TextButton")
+disable_collision_button.Name = "disable_collision"
+disable_collision_button.Parent = page1
+disable_collision_button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+disable_collision_button.BorderColor3 = Color3.fromRGB(0, 0, 255)
+disable_collision_button.BorderSizePixel = 2
+disable_collision_button.Position = UDim2.new(0.548, 0, 0.77, 0) -- {0.548, 0},{0.77, 0}
+disable_collision_button.Size = UDim2.new(0, 110, 0, 38) -- {0, 110},{0, 38}
+disable_collision_button.Text = "Disable collision"
+disable_collision_button.TextColor3 = Color3.fromRGB(255, 255, 255)
+disable_collision_button.TextScaled = true
+
+unanchor_part_button = Instance.new("TextButton")
+unanchor_part_button.Name = "unanchor_part"
+unanchor_part_button.Parent = page1
+unanchor_part_button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+unanchor_part_button.BorderColor3 = Color3.fromRGB(0, 0, 255)
+unanchor_part_button.BorderSizePixel = 2
+unanchor_part_button.Position = UDim2.new(0.548, 0, 0.576, 0) -- {0.548, 0},{0.576, 0}
+unanchor_part_button.Size = UDim2.new(0, 110, 0, 38) -- {0, 110},{0, 38}
+unanchor_part_button.Text = "Unanchor part"
+unanchor_part_button.TextColor3 = Color3.fromRGB(255, 255, 255)
+unanchor_part_button.TextScaled = true
+
+unlock_workspace_button = Instance.new("TextButton")
+unlock_workspace_button.Name = "unlock_workspace"
+unlock_workspace_button.Parent = page1
+unlock_workspace_button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+unlock_workspace_button.BorderColor3 = Color3.fromRGB(0, 0, 255)
+unlock_workspace_button.BorderSizePixel = 2
+unlock_workspace_button.Position = UDim2.new(0.281, 0, 0.382, 0) -- {0.281, 0},{0.382, 0}
+unlock_workspace_button.Size = UDim2.new(0, 110, 0, 38) -- {0, 110},{0, 38}
+unlock_workspace_button.Text = "Unlock workspace"
+unlock_workspace_button.TextColor3 = Color3.fromRGB(255, 255, 255)
+unlock_workspace_button.TextScaled = true
+
+btools_button = Instance.new("TextButton")
+btools_button.Name = "btools"
+btools_button.Parent = page1
+btools_button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+btools_button.BorderColor3 = Color3.fromRGB(0, 0, 255)
+btools_button.BorderSizePixel = 2
+btools_button.Position = UDim2.new(0.548, 0, 0.382, 0) -- {0.548, 0},{0.382, 0}
+btools_button.Size = UDim2.new(0, 110, 0, 38) -- {0, 110},{0, 38}
+btools_button.Text = "Btools"
+btools_button.TextColor3 = Color3.fromRGB(255, 255, 255)
+btools_button.TextScaled = true
+
 -- Programming buttons
 
 function select_part()
@@ -317,9 +389,152 @@ function bypassed_fly()
 	end
 end
 
+function teleport_to_player()
+	local localplayer = game.Players.LocalPlayer.Character
+	local player_name = input_textbox.Text:lower()
+	print("Trying to teleport to " .. player_name)
+	local player = nil
+	for i,v in pairs(game.Players:GetPlayers()) do
+		if v.Name:lower():match(player_name) then
+			player = v
+		end
+	end
+	if player ~= nil then
+		localplayer:moveTo(player.Character.Head.Position)
+	end
+end
+
+function enable_collisions(object)
+	for i,v in pairs(object:GetChildren()) do
+		if v:IsA("Model") or v:IsA("Folder") then
+			enable_collisions(v)
+		end
+		if v:IsA("Part") and v.Anchored == true then
+			v.CanCollide = true
+		end
+	end
+end
+
+function disable_collisions(object)
+	for i,v in pairs(object:GetChildren()) do
+		if v:IsA("Model") or v:IsA("Folder") then
+			disable_collisions(v)
+		end
+		if v:IsA("Part") and v.Anchored == true then
+			v.CanCollide = false
+		end
+	end
+end
+
+function teleport_to_part(part)
+	local exploiter_head_position = game.Players.LocalPlayer.Character.Head.Position
+	local part_position = part.Position
+	local distance = (exploiter_head_position-part_position).magnitude
+
+	local part_attachment = Instance.new("Attachment")
+	part_attachment.Parent = part
+
+	local exploiter_attachment = Instance.new("Attachment")
+	exploiter_attachment.Parent = game.Players.LocalPlayer.Character.Head
+
+	local align_position = Instance.new("AlignPosition")
+	align_position.Attachment0 = exploiter_attachment
+	align_position.Attachment1 = part_attachment
+
+	disable_collisions(workspace)
+	align_position.Parent = game.Players.LocalPlayer.Character.Head
+	part.Anchored = true
+	workspace.Gravity = 0
+	local x = os.time()
+	while distance >= 10 do
+		local exploiter_head_position = game.Players.LocalPlayer.Character.Head.Position
+		local part_position = part.Position
+		local distance = tonumber((exploiter_head_position-part_position).magnitude)
+		wait(0.01)
+		print(distance)
+		if distance < 10 then
+			break
+		end
+		if (os.time() - x) >= 20 then
+			break
+		end
+	end
+	game.Players.LocalPlayer.Character.Head.Anchored = true
+	enable_collisions(workspace)
+	part_attachment:Remove()
+	exploiter_attachment:Remove()
+	align_position:Remove()
+	workspace.Gravity = 196.2
+	game.Players.LocalPlayer.Character.Head.Anchored = false
+	part.Anchored = false
+end
+
+function bypassed_teleport_to_player()
+	local localplayer = game.Players.LocalPlayer.Character
+	local player_name = input_textbox.Text:lower()
+	local player = nil
+	for i,v in pairs(game.Players:GetPlayers()) do
+		if v.Name:lower():match(player_name) then
+			player = v
+		end
+	end
+	if player ~= nil then
+		print(player.Name)
+		teleport_to_part(player.Character.Head)
+	else
+		print("nil")
+	end
+end
+
+function enable_part_collision()
+	selected_part_value.Value.CanCollide = true
+end
+
+function disable_part_collision()
+	selected_part_value.Value.CanCollide = false
+end
+
+function unanchor_part()
+	selected_part_value.Value.Anchored = false
+end
+
+function unlock_ws()
+	local function iterate_in(object)
+		for i,v in pairs(object:GetChildren()) do
+			if v:IsA("Model") or v:IsA("Folder") then
+				iterate_in(v)
+			end
+			if v:IsA("Part") then
+				v.Locked = false
+			end
+		end
+	end
+	iterate_in(workspace)
+end
+
+function btools()
+	local localplayer = game.Players.LocalPlayer
+	local tool1 = Instance.new("HopperBin")
+	local tool2 = Instance.new("HopperBin")
+	local tool3 = Instance.new("HopperBin")
+	tool1.BinType = 1
+	tool2.BinType = 4
+	tool3.BinType = 3
+	tool1.Parent = localplayer.Backpack
+	tool2.Parent = localplayer.Backpack
+	tool3.Parent = localplayer.Backpack
+end
+
 show_hide_button.MouseButton1Click:Connect(show_hide_gui)
 select_part_button.MouseButton1Click:Connect(select_part)
 pager1_anchor_part_button.MouseButton1Click:Connect(anchor_part)
 anti_lag_button.MouseButton1Click:Connect(stop_lag)
 bring_part_button.MouseButton1Click:Connect(bring_part)
 bypassed_fly_button.MouseButton1Click:Connect(bypassed_fly)
+teleport_to_player_button.MouseButton1Click:Connect(teleport_to_player)
+bypassed_teleport_to_player_button.MouseButton1Click:Connect(bypassed_teleport_to_player)
+enable_collision_button.MouseButton1Click:Connect(enable_part_collision)
+disable_collision_button.MouseButton1Click:Connect(disable_part_collision)
+unanchor_part_button.MouseButton1Click:Connect(unanchor_part)
+unlock_workspace_button.MouseButton1Click:Connect(unlock_ws)
+btools_button.MouseButton1Click:Connect(btools)
