@@ -27,6 +27,10 @@ selected_part_value = Instance.new("ObjectValue")
 selected_part_value.Name = "selected_part"
 selected_part_value.Parent = main_frame
 
+bypassed_fly_active = Instance.new("BoolValue")
+bypassed_fly_active.Parent = main_frame
+bypassed_fly_active.Value = false
+
 blue_label = Instance.new("TextButton")
 blue_label.Name = "blue_label"
 blue_label.Parent = main_frame
@@ -79,6 +83,18 @@ output_textbox.Size = UDim2.new(0, 438, 0.1, 0) -- {0, 438},{0.1, 0}
 output_textbox.TextColor3 = Color3.fromRGB(255, 255, 255)
 output_textbox.TextScaled = true
 output_textbox.Text = "Output"
+
+input_textbox = Instance.new("TextBox")
+input_textbox.Name = "input_textbox"
+input_textbox.Parent = main_frame
+input_textbox.BackgroundColor3 = Color3.fromRGB(18, 18, 18)
+input_textbox.BorderColor3 = Color3.fromRGB(255, 0, 0)
+input_textbox.BorderSizePixel = 1
+input_textbox.Position = UDim2.new(0.003, 0, 1.018, 0) -- {0.003, 0},{1.018, 0}
+input_textbox.Size = UDim2.new(0, 438, 0, 20) -- {0, 438},{0, 20}
+input_textbox.TextColor3 = Color3.fromRGB(255, 255, 255)
+input_textbox.TextScaled = true
+input_textbox.Text = "Input"
 
 previous_page_button = Instance.new("TextButton")
 previous_page_button.Name = "previous_page"
@@ -182,6 +198,32 @@ bring_part_button.Text = "Bring part"
 bring_part_button.TextColor3 = Color3.fromRGB(255, 255, 255)
 bring_part_button.TextSize = 18
 
+bypassed_fly_button = Instance.new("TextButton")
+bypassed_fly_button.Name = "bypassed_fly"
+bypassed_fly_button.Parent = page1
+bypassed_fly_button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+bypassed_fly_button.BorderColor3 = Color3.fromRGB(255, 0, 0)
+bypassed_fly_button.BorderSizePixel = 2
+bypassed_fly_button.Position = UDim2.new(0.014, 0, 0.188, 0) -- {0.014, 0},{0.031, 0}
+bypassed_fly_button.Size = UDim2.new(0, 110, 0, 38) -- {0, 110},{0, 38}
+bypassed_fly_button.Text = "Toggle bypassed fly"
+bypassed_fly_button.TextColor3 = Color3.fromRGB(255, 255, 255)
+bypassed_fly_button.TextScaled = true
+
+-- position of teleport to player: 
+
+teleport_to_player_button = Instance.new("TextButton")
+teleport_to_player_button.Name = "teleport_to_player"
+teleport_to_player_button.Parent = page1
+teleport_to_player_button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+teleport_to_player_button.BorderColor3 = Color3.fromRGB(255, 0, 0)
+teleport_to_player_button.BorderSizePixel = 2
+teleport_to_player_button.Position = UDim2.new(0.014, 0, 0.01, 0) -- {0.014, 0},{0.01, 0}
+teleport_to_player_button.Size = UDim2.new(0, 110, 0, 38) -- {0, 110},{0, 38}
+teleport_to_player_button.Text = "Teleport to player"
+teleport_to_player_button.TextColor3 = Color3.fromRGB(255, 255, 255)
+teleport_to_player_button.TextScaled = true
+
 -- Programming buttons
 
 function select_part()
@@ -225,7 +267,59 @@ function stop_lag()
 	iterate_in(workspace)
 end
 
+function bring_part()
+	local part = selected_part_value.Value
+	part.Position = game.Players.LocalPlayer.Character.Head.Position
+end
+
+function bypassed_fly()
+	if bypassed_fly_active.Value == true then
+		bypassed_fly_active.Value = false
+	else
+		bypassed_fly_active.Value = true
+	end
+	
+	local localplayer = game.Players.LocalPlayer.Character
+	local fly_on = Instance.new("BoolValue")
+	fly_on.Value = true
+	fly_on.Parent = workspace
+	fly_on.Name = "bypassed_fly"
+	local r15 = false
+	local leg = nil
+	if localplayer:FindFirstChild("RightLowerLeg") ~= nil then
+		leg = localplayer:FindFirstChild("RightLowerLeg")
+	else
+		leg = localplayer:FindFirstChild("Right Leg")
+	end
+
+	local platform = Instance.new("Part")
+	local mesh = Instance.new("SpecialMesh")
+	mesh.MeshType = Enum.MeshType.Cylinder
+	mesh.Parent = platform
+	platform.Parent = workspace
+
+	platform.Color = Color3.fromRGB(170, 0, 255)
+	platform.Transparency = 0.5
+
+	platform.Size = Vector3.new(0.25, 5.7, 6)
+	platform.Orientation = Vector3.new(0, 0, 90)
+	platform.Anchored = true
+	platform.Name = "platform"
+	while bypassed_fly_active.Value == true do
+		platform.Position = Vector3.new(leg.Position.X-0.5, leg.Position.Y-1.5, leg.Position.Z)
+		wait(0.001)
+		if workspace:FindFirstChild("bypassed_fly").Value == false then
+			platform.Anchored = false
+			platform.CanCollide = false
+			workspace:FindFirstChild("bypassed_fly"):Remove()
+			break
+		end
+	end
+end
+
 show_hide_button.MouseButton1Click:Connect(show_hide_gui)
 select_part_button.MouseButton1Click:Connect(select_part)
 pager1_anchor_part_button.MouseButton1Click:Connect(anchor_part)
 anti_lag_button.MouseButton1Click:Connect(stop_lag)
+bring_part_button.MouseButton1Click:Connect(bring_part)
+bypassed_fly_button.MouseButton1Click:Connect(bypassed_fly)
