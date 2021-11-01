@@ -701,6 +701,22 @@ function next_page()
 	end
 end
 
+function previous_page()
+	if current_page.Value == 1 then
+		current_page.Value = max_page.Value
+		for i,v in pairs(pages_folder:GetChildren()) do
+			v.Visible = false
+		end
+		pages_folder:FindFirstChild("page" .. tostring(max_page.Value)).Visible = true
+	else
+		for i,v in pairs(pages_folder:GetChildren()) do
+			v.Visible = false
+		end
+		current_page.Value = current_page.Value-1
+		pages_folder:FindFirstChild("page" .. tostring(current_page.Value)).Visible = true
+	end
+end
+
 function measure_vertex_distance()
 	if workspace:FindFirstChild("vertex1") == nil then
 		local stoppedatvertex = Instance.new("IntValue")
@@ -945,6 +961,7 @@ set_speed_button.MouseButton1Click:Connect(set_speed)
 set_jump_power_button.MouseButton1Click:Connect(set_jump_power)
 f_to_noclip_button.MouseButton1Click:Connect(e_to_noclip)
 next_page_button.MouseButton1Click:Connect(next_page)
+previous_page_button.MouseButton1Click:Connect(previous_page)
 measure_vertex_distance_button.MouseButton1Click:Connect(measure_vertex_distance)
 clear_vertices_button.MouseButton1Click:Connect(clear_vertices)
 add_label_button.MouseButton1Click:Connect(add_vertex_label)
