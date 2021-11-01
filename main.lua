@@ -162,6 +162,8 @@ pages_folder = Instance.new("Folder")
 pages_folder.Name = "pages"
 pages_folder.Parent = main_c00l_hax
 
+-- Page1
+
 page1 = Instance.new("Frame")
 page1.Name = "page1"
 page1.Parent = pages_folder
@@ -351,12 +353,75 @@ f_to_noclip_button.Text = "F to noclip"
 f_to_noclip_button.TextColor3 = Color3.fromRGB(255, 255, 255)
 f_to_noclip_button.TextScaled = true
 
+-- Page 2
+
 page2 = Instance.new("Frame")
 page2.Name = "page2"
 page2.Parent = pages_folder
 page2.BackgroundTransparency = 1
 page2.Position = UDim2.new(0, 14, 0.495, 0) -- {0, 14},{0.495, 0}
 page2.Size = UDim2.new(0, 438, 0, 229) -- {0, 438},{0, 229}
+page2.Visible = false
+
+measure_vertex_distance_button = Instance.new("TextButton")
+measure_vertex_distance_button.Name = "measure_vertex_distance"
+measure_vertex_distance_button.Parent = page2
+measure_vertex_distance_button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+measure_vertex_distance_button.BorderColor3 = Color3.fromRGB(0, 0, 255)
+measure_vertex_distance_button.BorderSizePixel = 2
+measure_vertex_distance_button.Position = UDim2.new(0.014, 0, 0.01, 0) -- {0.014, 0},{0.01, 0}
+measure_vertex_distance_button.Size = UDim2.new(0, 110, 0, 38) -- {0, 110},{0, 38}
+measure_vertex_distance_button.Text = "Ctrl+click to measure distances"
+measure_vertex_distance_button.TextColor3 = Color3.fromRGB(255, 255, 255)
+measure_vertex_distance_button.TextScaled = true
+
+clear_vertices_button = Instance.new("TextButton")
+clear_vertices_button.Name = "clear_vertices"
+clear_vertices_button.Parent = page2
+clear_vertices_button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+clear_vertices_button.BorderColor3 = Color3.fromRGB(0, 0, 255)
+clear_vertices_button.BorderSizePixel = 2
+clear_vertices_button.Position = UDim2.new(0.281, 0, 0.01, 0) -- {0.281, 0},{0.01, 0}
+clear_vertices_button.Size = UDim2.new(0, 110, 0, 38) -- {0, 110},{0, 38}
+clear_vertices_button.Text = "Clear vertices"
+clear_vertices_button.TextColor3 = Color3.fromRGB(255, 255, 255)
+clear_vertices_button.TextScaled = true
+
+add_label_button = Instance.new("TextButton")
+add_label_button.Name = "add_vertex_label"
+add_label_button.Parent = page2
+add_label_button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+add_label_button.BorderColor3 = Color3.fromRGB(0, 0, 255)
+add_label_button.BorderSizePixel = 2
+add_label_button.Position = UDim2.new(0.548, 0, 0.01, 0) -- {0.548, 0},{0.01, 0}
+add_label_button.Size = UDim2.new(0, 110, 0, 38) -- {0, 110},{0, 38}
+add_label_button.Text = "Left-alt+click to Add label"
+add_label_button.TextColor3 = Color3.fromRGB(255, 255, 255)
+add_label_button.TextScaled = true
+
+draw_tool_button = Instance.new("TextButton")
+draw_tool_button.Name = "draw_tool"
+draw_tool_button.Parent = page2
+draw_tool_button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+draw_tool_button.BorderColor3 = Color3.fromRGB(0, 0, 255)
+draw_tool_button.BorderSizePixel = 2
+draw_tool_button.Position = UDim2.new(0.014, 0, 0.188, 0) -- {0.014, 0},{0.031, 0}
+draw_tool_button.Size = UDim2.new(0, 110, 0, 38) -- {0, 110},{0, 38}
+draw_tool_button.Text = "Draw tool"
+draw_tool_button.TextColor3 = Color3.fromRGB(255, 255, 255)
+draw_tool_button.TextScaled = true
+
+clear_drawings_button = Instance.new("TextButton")
+clear_drawings_button.Name = "clear_drawings"
+clear_drawings_button.Parent = page2
+clear_drawings_button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+clear_drawings_button.BorderColor3 = Color3.fromRGB(0, 0, 255)
+clear_drawings_button.BorderSizePixel = 2
+clear_drawings_button.Position = UDim2.new(0.281, 0, 0.188, 0) -- {0.281, 0},{0.188, 0}
+clear_drawings_button.Size = UDim2.new(0, 110, 0, 38) -- {0, 110},{0, 38}
+clear_drawings_button.Text = "Clear drawings"
+clear_drawings_button.TextColor3 = Color3.fromRGB(255, 255, 255)
+clear_drawings_button.TextScaled = true
 
 -- Programming buttons
 
@@ -632,7 +697,234 @@ function next_page()
 			v.Visible = false
 		end
 		current_page.Value = current_page.Value+1
-		pages_folder:FindFirstChild("page" + tostring(current_page.Value)).Visible = true
+		pages_folder:FindFirstChild("page" .. tostring(current_page.Value)).Visible = true
+	end
+end
+
+function measure_vertex_distance()
+	if workspace:FindFirstChild("vertex1") == nil then
+		local stoppedatvertex = Instance.new("IntValue")
+		stoppedatvertex.Value = 1
+		stoppedatvertex.Parent = workspace
+		stoppedatvertex.Name = "stoppedatvertex"
+
+		local vertex1 = Instance.new("StringValue")
+		vertex1.Parent = workspace
+		vertex1.Name = "vertex1"
+
+		local vertex2 = Instance.new("StringValue")
+		vertex2.Parent = workspace
+		vertex2.Name = "vertex2"
+	end
+
+	local Plr = game:GetService("Players").LocalPlayer
+	local Mouse = Plr:GetMouse()
+
+	Mouse.Button1Down:connect(function()
+		if not game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.LeftControl) then return end
+		if not Mouse.Target then return end
+		local sound = Instance.new("Sound")
+		sound.SoundId = "rbxassetid://7541642708"
+		sound.Parent = workspace
+		sound.Volume = 0.5
+		sound.Playing = true
+		sound.Name = "boowomp"
+		local position = Mouse.Hit.p
+		local vertex = Instance.new("Part")
+		vertex.Shape = Enum.PartType.Ball
+		vertex.Size = Vector3.new(0.5,0.5,0.5)
+		vertex.Color = Color3.fromRGB(255, 0, 0)
+		vertex.Anchored = true
+		vertex.Position = position
+		vertex.Parent = workspace
+		vertex.Name = "vertex" .. tostring(workspace.stoppedatvertex.Value) .. "a"
+		local billboard = Instance.new("BillboardGui")
+		billboard.ExtentsOffset = Vector3.new(0, 5, 0)
+		billboard.Parent = vertex
+		billboard.Size = UDim2.new(0, 50, 0, 50) -- {0, 70},{0, 70}
+		local label = Instance.new("TextLabel")
+		label.BackgroundTransparency = 1
+		label.TextScaled = true
+		label.TextColor3 = Color3.fromRGB(0, 0, 149)
+		label.Parent = billboard
+		label.Size = UDim2.new(0, 50, 0, 50) -- {0, 70},{0, 70}
+		label.Text = tostring(workspace.stoppedatvertex.Value)
+		label.TextStrokeColor3 = Color3.fromRGB(255, 255, 255)
+		label.TextStrokeTransparency = 0
+		if workspace.stoppedatvertex.Value % 2 == 0 then
+			workspace.vertex1.Value = "vertex" .. tostring(workspace.stoppedatvertex.Value) .. "a"
+		else
+			workspace.vertex2.Value = "vertex" .. tostring(workspace.stoppedatvertex.Value) .. "a"
+		end
+		workspace.stoppedatvertex.Value = workspace.stoppedatvertex.Value + 1
+		for i,v in pairs(workspace:GetChildren()) do
+			if v.Name:find("vertex", 1, #"vertex") and v.ClassName == "Part" then
+				if v.Name ~= workspace.vertex1.Value and v.Name ~= workspace.vertex2.Value then
+					v.Color = Color3.fromRGB(117, 117, 117)
+					if v:FindFirstChild("Beam") == true then
+						v.Beam.Color = ColorSequence.new(Color3.fromRGB(117, 117, 117))
+					end
+				end
+			end
+		end
+		if workspace.vertex1.Value ~= "" and workspace.vertex2.Value ~= "" then
+			local vertex1a = workspace:FindFirstChild(workspace.vertex1.Value)
+			local vertex2a = workspace:FindFirstChild(workspace.vertex2.Value)
+			local attachment1 = Instance.new("Attachment")
+			attachment1.Parent = vertex1a
+			local attachment2 = Instance.new("Attachment")
+			attachment2.Parent = vertex2a
+			local beam = Instance.new("Beam")
+			beam.Parent = vertex1a
+			beam.Color = ColorSequence.new(Color3.fromRGB(255, 240, 71))
+			beam.Attachment0 = attachment1
+			beam.Attachment1 = attachment2
+			beam.Width0 = 0.5
+			beam.Width1 = 0.5
+		end
+		if workspace.vertex1.Value ~= "" and workspace.vertex2.Value ~= "" then
+			local vertex1a = workspace:FindFirstChild(workspace.vertex1.Value)
+			local vertex2a = workspace:FindFirstChild(workspace.vertex2.Value)
+			local distance = (vertex1a.Position-vertex2a.Position).Magnitude
+			output_textbox.Text = "Distance between last two vertices: " .. tostring(distance)
+		end
+		wait(1.5)
+		for i,v in pairs(workspace:GetChildren()) do
+			if v.Name == "boowomp" then
+				v:Remove()
+			end
+		end
+	end)
+end
+
+function clear_vertices()
+	for i,v in pairs(workspace:GetChildren()) do
+		if v.Name:match("vertex") ~= nil and v.ClassName == "Part" then
+			v:Remove()
+		end
+	end
+	if workspace:FindFirstChild("stoppedatvertex") then
+		workspace.stoppedatvertex.Value = 1
+		workspace.vertex1.Value = ""
+		workspace.vertex2.Value = ""
+	end
+end
+
+function add_vertex_label()
+	local Plr = game:GetService("Players").LocalPlayer
+	local Mouse = Plr:GetMouse()
+
+	Mouse.Button1Down:connect(function()
+		if not game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.LeftAlt) then return end
+		if not Mouse.Target then return end
+		local sound = Instance.new("Sound")
+		sound.SoundId = "rbxassetid://7541642708"
+		sound.Parent = workspace
+		sound.Volume = 0.5
+		sound.Playing = true
+		sound.Name = "boowomp"
+		local position = Mouse.Hit.p
+		local vertex = Instance.new("Part")
+		vertex.Shape = Enum.PartType.Ball
+		vertex.Size = Vector3.new(0.5,0.5,0.5)
+		vertex.Color = Color3.fromRGB(106, 106, 106)
+		vertex.Anchored = true
+		vertex.Position = position
+		vertex.Parent = workspace
+		vertex.Name = "alabel"
+		local billboard = Instance.new("BillboardGui")
+		billboard.ExtentsOffset = Vector3.new(0, 5, 0)
+		billboard.Parent = vertex
+		billboard.Size = UDim2.new(0, 50, 0, 50) -- {0, 70},{0, 70}
+		local label = Instance.new("TextLabel")
+		label.BackgroundTransparency = 1
+		label.TextScaled = true
+		label.TextColor3 = Color3.fromRGB(255, 0, 251)
+		label.TextStrokeColor3 = Color3.fromRGB(255, 255, 255)
+		label.TextStrokeTransparency = 0
+		label.Parent = billboard
+		label.Size = UDim2.new(0, 50, 0, 50) -- {0, 70},{0, 70}
+		label.Text = input_textbox.Text
+	end)
+end
+
+function give_draw_tool()
+	local plyr = game.Players.LocalPlayer
+	local c = plyr.Character
+	local RunService = game:service'RunService'
+	local mouse = game.Players.LocalPlayer:GetMouse()
+	local draw2 = false
+	local colorA = 1
+	local lastPos
+
+	local tool = Instance.new("HopperBin", plyr.Backpack)
+	tool.Name = "Draw"
+
+
+
+	mouse = plyr:GetMouse()
+
+
+	function draw(obj) -- 
+		local lastPos = obj.CFrame.p
+		coroutine.wrap(function()
+			while wait() do
+				if draw2 then
+					while draw2 do
+						RunService.Stepped:wait()
+						objC = obj:Clone()
+						objC.Parent = c
+						objC.Anchored = true
+						local distance = (lastPos- obj.CFrame.p).magnitude
+						objC.Size = Vector3.new(.2,.2,distance)
+						objC.CFrame = CFrame.new(lastPos,obj.Position)*CFrame.new(0,0,-distance/2)
+						lastPos = obj.CFrame.p
+					end
+				else
+					break
+				end
+			end
+		end)()
+	end
+
+	tool.Selected:connect(function(mouse)
+
+		mouse.Button1Down:connect(function(mouse)
+			local part = Instance.new("Part", c)
+			part.Name = "location"
+			part.BottomSurface = 0
+			part.TopSurface = 0
+			part.BrickColor = BrickColor.Black()
+			part.FormFactor = "Custom"
+			part.Size = Vector3.new(0.2, 0.2, 0.2)
+			part.Anchored = true
+			part.Locked = true
+			coroutine.wrap(function()
+				while part ~= nil do
+					part.CFrame = CFrame.new(plyr:GetMouse().Hit.p.x,plyr:GetMouse().Hit.p.y,plyr:GetMouse().Hit.p.z)
+					RunService.Stepped:wait()
+				end
+			end)()         
+			draw(part)
+			draw2 = true
+		end)
+		mouse.Button1Up:connect(function(mouse)
+			game:service'Debris':AddItem(part, 0)
+			draw2 = false
+			pcall(function()
+				lastPos = nil
+			end)
+
+		end)
+
+	end)
+end
+
+function clear_drawings()
+	for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+		if v.Name == "location" then
+			v:Remove()
+		end
 	end
 end
 
@@ -653,3 +945,8 @@ set_speed_button.MouseButton1Click:Connect(set_speed)
 set_jump_power_button.MouseButton1Click:Connect(set_jump_power)
 f_to_noclip_button.MouseButton1Click:Connect(e_to_noclip)
 next_page_button.MouseButton1Click:Connect(next_page)
+measure_vertex_distance_button.MouseButton1Click:Connect(measure_vertex_distance)
+clear_vertices_button.MouseButton1Click:Connect(clear_vertices)
+add_label_button.MouseButton1Click:Connect(add_vertex_label)
+draw_tool_button.MouseButton1Click:Connect(give_draw_tool)
+clear_drawings_button.MouseButton1Click:Connect(clear_drawings)
