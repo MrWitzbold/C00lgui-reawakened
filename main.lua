@@ -32,6 +32,15 @@ ck_banner.Size = UDim2.new(0, 79, 0, 216) -- {0, 79},{0, 216}
 ck_banner.BorderSizePixel = 0
 ck_banner.Image = "http://www.roblox.com/asset/?id=7864107680"
 
+current_page = Instance.new("IntValue")
+current_page.Name = "current_page"
+current_page.Parent = main_frame
+current_page.Value = 1
+
+max_page = Instance.new("IntValue")
+max_page.Name = "max_page"
+max_page.Parent = main_frame
+max_page.Value = 2
 
 selected_part_value = Instance.new("ObjectValue")
 selected_part_value.Name = "selected_part"
@@ -342,6 +351,13 @@ f_to_noclip_button.Text = "F to noclip"
 f_to_noclip_button.TextColor3 = Color3.fromRGB(255, 255, 255)
 f_to_noclip_button.TextScaled = true
 
+page2 = Instance.new("Frame")
+page2.Name = "page2"
+page2.Parent = pages_folder
+page2.BackgroundTransparency = 1
+page2.Position = UDim2.new(0, 14, 0.495, 0) -- {0, 14},{0.495, 0}
+page2.Size = UDim2.new(0, 438, 0, 229) -- {0, 438},{0, 229}
+
 -- Programming buttons
 
 function select_part()
@@ -604,6 +620,22 @@ function e_to_noclip()
 	end)
 end
 
+function next_page()
+	if current_page.Value == max_page.Value then
+		current_page.Value = 1
+		for i,v in pairs(pages_folder:GetChildren()) do
+			v.Visible = false
+		end
+		page1.Visible = true
+	else
+		for i,v in pairs(pages_folder:GetChildren()) do
+			v.Visible = false
+		end
+		current_page.Value = current_page.Value+1
+		pages_folder:FindFirstChild("page" + tostring(current_page.Value)).Visible = true
+	end
+end
+
 show_hide_button.MouseButton1Click:Connect(show_hide_gui)
 select_part_button.MouseButton1Click:Connect(select_part)
 pager1_anchor_part_button.MouseButton1Click:Connect(anchor_part)
@@ -620,3 +652,4 @@ btools_button.MouseButton1Click:Connect(btools)
 set_speed_button.MouseButton1Click:Connect(set_speed)
 set_jump_power_button.MouseButton1Click:Connect(set_jump_power)
 f_to_noclip_button.MouseButton1Click:Connect(e_to_noclip)
+next_page_button.MouseButton1Click:Connect(next_page)
