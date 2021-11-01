@@ -9,6 +9,7 @@ wait(2)
 
 -- HORIZONTAL DISTANCE BETWEEN BUTTONS: 0.267
 -- horizontal value = 1st value in udim2
+-- to go to the right it's positive
 
 main_c00l_hax = Instance.new("ScreenGui")
 main_c00l_hax.Parent = game.Players.LocalPlayer.PlayerGui
@@ -22,6 +23,15 @@ main_frame.BorderColor3 = Color3.fromRGB(255, 0, 0)
 main_frame.BorderSizePixel = 2
 main_frame.Size = UDim2.new(0, 440, 0, 341) -- {0, 440},{0, 341}
 main_frame.Position = UDim2.new(0.013, 0, 0.363, 0) -- {0.013, 0},{0.363, 0}
+
+ck_banner = Instance.new("ImageLabel")
+ck_banner.Name = "c00lkidd_banner"
+ck_banner.Parent = main_frame
+ck_banner.Position = UDim2.new(0.811, 0, 0.224, 0) -- {0.811, 0},{0.224, 0}
+ck_banner.Size = UDim2.new(0, 79, 0, 216) -- {0, 79},{0, 216}
+ck_banner.BorderSizePixel = 0
+ck_banner.Image = "http://www.roblox.com/asset/?id=7864107680"
+
 
 selected_part_value = Instance.new("ObjectValue")
 selected_part_value.Name = "selected_part"
@@ -296,6 +306,42 @@ btools_button.Text = "Btools"
 btools_button.TextColor3 = Color3.fromRGB(255, 255, 255)
 btools_button.TextScaled = true
 
+set_speed_button = Instance.new("TextButton")
+set_speed_button.Name = "set_speed"
+set_speed_button.Parent = page1
+set_speed_button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+set_speed_button.BorderColor3 = Color3.fromRGB(255, 0, 0)
+set_speed_button.BorderSizePixel = 2
+set_speed_button.Position = UDim2.new(0.281, 0, 0.188, 0) -- {0.281, 0},{0.188, 0}
+set_speed_button.Size = UDim2.new(0, 110, 0, 38) -- {0, 110},{0, 38}
+set_speed_button.Text = "Set speed"
+set_speed_button.TextColor3 = Color3.fromRGB(255, 255, 255)
+set_speed_button.TextSize = 16
+
+set_jump_power_button = Instance.new("TextButton")
+set_jump_power_button.Name = "set_jump_power"
+set_jump_power_button.Parent = page1
+set_jump_power_button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+set_jump_power_button.BorderColor3 = Color3.fromRGB(255, 0, 0)
+set_jump_power_button.BorderSizePixel = 2
+set_jump_power_button.Position = UDim2.new(0.548, 0, 0.188, 0) -- {0.548, 0},{0.188, 0}
+set_jump_power_button.Size = UDim2.new(0, 110, 0, 38) -- {0, 110},{0, 38}
+set_jump_power_button.Text = "Set jump power"
+set_jump_power_button.TextColor3 = Color3.fromRGB(255, 255, 255)
+set_jump_power_button.TextScaled = true
+
+f_to_noclip_button = Instance.new("TextButton")
+f_to_noclip_button.Name = "set_jump_power"
+f_to_noclip_button.Parent = page1
+f_to_noclip_button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+f_to_noclip_button.BorderColor3 = Color3.fromRGB(255, 0, 0)
+f_to_noclip_button.BorderSizePixel = 2
+f_to_noclip_button.Position = UDim2.new(0.548, 0, 0.01, 0) -- {0.548, 0},{0.01, 0}
+f_to_noclip_button.Size = UDim2.new(0, 110, 0, 38) -- {0, 110},{0, 38}
+f_to_noclip_button.Text = "F to noclip"
+f_to_noclip_button.TextColor3 = Color3.fromRGB(255, 255, 255)
+f_to_noclip_button.TextScaled = true
+
 -- Programming buttons
 
 function select_part()
@@ -314,8 +360,12 @@ function show_hide_gui()
 	if main_frame.Visible == true then
 		main_frame.Visible = false
 		show_hide_button.Text = "Show"
+		for i,v in pairs(pages_folder:GetChildren()) do
+			v.Visible = false
+		end
 	else
 		main_frame.Visible = true
+		page1.Visible = true
 		show_hide_button.Text = "Hide"
 	end
 end
@@ -525,6 +575,35 @@ function btools()
 	tool3.Parent = localplayer.Backpack
 end
 
+function set_speed()
+	local localplayer = game.Players.LocalPlayer
+	local new_speed = tonumber(input_textbox.Text)
+	localplayer.Character.Humanoid.WalkSpeed = new_speed
+end
+
+function set_jump_power()
+	local localplayer = game.Players.LocalPlayer
+	local new_jump_power = tonumber(input_textbox.Text)
+	localplayer.Character.Humanoid.JumpPower = new_jump_power
+end
+
+function e_to_noclip()
+	local noclip = false
+	game:GetService('RunService').Stepped:connect(function()
+		if noclip then
+			game.Players.LocalPlayer.Character.Humanoid:ChangeState(11)
+		end
+	end)
+	local plr = game.Players.LocalPlayer
+	local mouse = plr:GetMouse()
+	mouse.KeyDown:connect(function(key)
+		if key == "f" then
+			noclip = not noclip
+			game.Players.LocalPlayer.Character.Humanoid:ChangeState(11)
+		end
+	end)
+end
+
 show_hide_button.MouseButton1Click:Connect(show_hide_gui)
 select_part_button.MouseButton1Click:Connect(select_part)
 pager1_anchor_part_button.MouseButton1Click:Connect(anchor_part)
@@ -538,3 +617,6 @@ disable_collision_button.MouseButton1Click:Connect(disable_part_collision)
 unanchor_part_button.MouseButton1Click:Connect(unanchor_part)
 unlock_workspace_button.MouseButton1Click:Connect(unlock_ws)
 btools_button.MouseButton1Click:Connect(btools)
+set_speed_button.MouseButton1Click:Connect(set_speed)
+set_jump_power_button.MouseButton1Click:Connect(set_jump_power)
+f_to_noclip_button.MouseButton1Click:Connect(e_to_noclip)
