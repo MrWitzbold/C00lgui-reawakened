@@ -24,6 +24,11 @@ main_frame.BorderSizePixel = 2
 main_frame.Size = UDim2.new(0, 440, 0, 341) -- {0, 440},{0, 341}
 main_frame.Position = UDim2.new(0.013, 0, 0.363, 0) -- {0.013, 0},{0.363, 0}
 
+teleport_index_ = Instance.new("IntValue")
+teleport_index_.Name = "teleport_index"
+teleport_index_.Parent = main_frame
+teleport_index_.Value = 0
+
 ck_banner = Instance.new("ImageLabel")
 ck_banner.Name = "c00lkidd_banner"
 ck_banner.Parent = main_frame
@@ -102,6 +107,7 @@ output_textbox.Size = UDim2.new(0, 438, 0.1, 0) -- {0, 438},{0.1, 0}
 output_textbox.TextColor3 = Color3.fromRGB(255, 255, 255)
 output_textbox.TextScaled = true
 output_textbox.Text = "Output"
+output_textbox.ClearTextOnFocus = false
 
 input_textbox = Instance.new("TextBox")
 input_textbox.Name = "input_textbox"
@@ -114,6 +120,7 @@ input_textbox.Size = UDim2.new(0, 438, 0, 20) -- {0, 438},{0, 20}
 input_textbox.TextColor3 = Color3.fromRGB(255, 255, 255)
 input_textbox.TextScaled = true
 input_textbox.Text = "Input"
+input_textbox.ClearTextOnFocus = false
 
 previous_page_button = Instance.new("TextButton")
 previous_page_button.Name = "previous_page"
@@ -422,6 +429,54 @@ clear_drawings_button.Size = UDim2.new(0, 110, 0, 38) -- {0, 110},{0, 38}
 clear_drawings_button.Text = "Clear drawings"
 clear_drawings_button.TextColor3 = Color3.fromRGB(255, 255, 255)
 clear_drawings_button.TextScaled = true
+
+get_current_position_button = Instance.new("TextButton")
+get_current_position_button.Name = "get_current_position"
+get_current_position_button.Parent = page2
+get_current_position_button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+get_current_position_button.BorderColor3 = Color3.fromRGB(0, 0, 255)
+get_current_position_button.BorderSizePixel = 2
+get_current_position_button.Position = UDim2.new(0.548, 0, 0.188, 0) -- {0.548, 0},{0.188, 0}
+get_current_position_button.Size = UDim2.new(0, 110, 0, 38) -- {0, 110},{0, 38}
+get_current_position_button.Text = "Get your position"
+get_current_position_button.TextColor3 = Color3.fromRGB(255, 255, 255)
+get_current_position_button.TextScaled = true
+
+teleport_to_selected_part_button = Instance.new("TextButton")
+teleport_to_selected_part_button.Name = "teleport_to_selected_part"
+teleport_to_selected_part_button.Parent = page2
+teleport_to_selected_part_button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+teleport_to_selected_part_button.BorderColor3 = Color3.fromRGB(255, 0, 0)
+teleport_to_selected_part_button.BorderSizePixel = 2
+teleport_to_selected_part_button.Position = UDim2.new(0.014, 0, 0.382, 0) -- {0.014, 0},{0.382, 0}
+teleport_to_selected_part_button.Size = UDim2.new(0, 110, 0, 38) -- {0, 110},{0, 38}
+teleport_to_selected_part_button.Text = "Teleport to selected part"
+teleport_to_selected_part_button.TextColor3 = Color3.fromRGB(255, 255, 255)
+teleport_to_selected_part_button.TextScaled = true
+
+telepad1_button = Instance.new("TextButton")
+telepad1_button.Name = "telepad1"
+telepad1_button.Parent = page2
+telepad1_button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+telepad1_button.BorderColor3 = Color3.fromRGB(255, 0, 0)
+telepad1_button.BorderSizePixel = 2
+telepad1_button.Position = UDim2.new(0.281, 0, 0.382, 0) -- {0.281, 0},{0.382, 0}
+telepad1_button.Size = UDim2.new(0, 110, 0, 38) -- {0, 110},{0, 38}
+telepad1_button.Text = "Teleport pad 1"
+telepad1_button.TextColor3 = Color3.fromRGB(255, 255, 255)
+telepad1_button.TextScaled = true
+
+telepad2_button = Instance.new("TextButton")
+telepad2_button.Name = "telepad2"
+telepad2_button.Parent = page2
+telepad2_button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+telepad2_button.BorderColor3 = Color3.fromRGB(255, 0, 0)
+telepad2_button.BorderSizePixel = 2
+telepad2_button.Position = UDim2.new(0.548, 0, 0.382, 0) -- {0.548, 0},{0.382, 0}
+telepad2_button.Size = UDim2.new(0, 110, 0, 38) -- {0, 110},{0, 38}
+telepad2_button.Text = "Teleport pad 2"
+telepad2_button.TextColor3 = Color3.fromRGB(255, 255, 255)
+telepad2_button.TextScaled = true
 
 -- Programming buttons
 
@@ -944,6 +999,118 @@ function clear_drawings()
 	end
 end
 
+function get_current_position()
+	local player_position = tostring(game.Players.LocalPlayer.Character.Head.Position)
+	output_textbox.Text = player_position
+end
+
+function teleport_to_selected_part()
+	if selected_part_value.Value ~= nil then
+		game.Players.LocalPlayer.Character:moveTo(selected_part_value.Value.Position)
+	else
+		output_textbox.Text = "No part is selected"
+	end
+end
+
+function teleport_pad_1()
+	local LocalPlayer = game.Players.LocalPlayer
+	local teleport_index = teleport_index_
+	local teleport1 = Instance.new("Part")
+
+	local teleport1_surfaceGui = Instance.new("SurfaceGui")
+	teleport1_surfaceGui.Face = Enum.NormalId.Top
+	teleport1_surfaceGui.Parent = teleport1
+	local teleport1_frame = Instance.new("Frame")
+	teleport1_frame.BackgroundTransparency = 1
+	teleport1_frame.Size = UDim2.new(0, 800, 0, 600) -- {0, 800},{0, 600}
+	teleport1_frame.Parent = teleport1_surfaceGui
+
+	local index_label = Instance.new("TextLabel")
+	index_label.Parent = teleport1_frame
+	index_label.Text = teleport_index.Value
+	index_label.BackgroundTransparency = 1
+	index_label.TextColor3 = Color3.fromRGB(255, 255, 255)
+	index_label.Size = UDim2.new(0, 800, 0, 600)
+	index_label.TextSize = 100
+
+	local Head_position = LocalPlayer.Character.Head.Position
+	teleport1.Anchored = true
+	teleport1.Color = Color3.fromRGB(0, 0, 255)
+	teleport1.Size = Vector3.new(4, 0.25, 4)
+	teleport1.Position = Vector3.new(Head_position.X, Head_position.Y-4.3, Head_position.Z)
+	teleport1.Parent = workspace
+	teleport1.Name = "teleportpad1_" .. tostring(teleport_index.Value)
+	telepad1_button.Visible = false
+
+	local function teleport_1_to_2(whattouchedit)
+		if whattouchedit.Parent:FindFirstChild("Humanoid") ~= nil then
+			local teleport2_name = "teleportpad2" .. "_" .. string.split(teleport1.Name, "_")[2]
+			print("Person touched it")
+			print(teleport2_name)
+			local teleport2 = game.Workspace:FindFirstChild(teleport2_name)
+			teleport1.CanTouch = false
+			teleport2.CanTouch = false
+			LocalPlayer.Character:moveTo(teleport2.Position)
+			wait(3)
+			teleport1.CanTouch = true
+			teleport2.CanTouch = true
+		else
+			print("Something touched it, not a person")
+		end
+	end
+	teleport1.Touched:Connect(teleport_1_to_2)
+end
+
+function teleport_pad_2()
+	local LocalPlayer = game.Players.LocalPlayer
+	local teleport_index = teleport_index_
+	local teleport2 = Instance.new("Part")
+	local Head_position = LocalPlayer.Character.Head.Position
+	teleport2.Anchored = true
+	teleport2.Color = Color3.fromRGB(255, 0, 0)
+	teleport2.Size = Vector3.new(4, 0.25, 4)
+	teleport2.Position = Vector3.new(Head_position.X, Head_position.Y-4.3, Head_position.Z)
+	teleport2.Parent = workspace
+	telepad1_button.Visible = true
+	teleport2.Name = "teleportpad2_" .. tostring(teleport_index.Value)
+
+	local teleport2_surfaceGui = Instance.new("SurfaceGui")
+	teleport2_surfaceGui.Face = Enum.NormalId.Top
+	teleport2_surfaceGui.Parent = teleport2
+	local teleport2_frame = Instance.new("Frame")
+	teleport2_frame.BackgroundTransparency = 1
+	teleport2_frame.Size = UDim2.new(0, 800, 0, 600) -- {0, 800},{0, 600}
+	teleport2_frame.Parent = teleport2_surfaceGui
+
+	local index_label = Instance.new("TextLabel")
+	index_label.Parent = teleport2_frame
+	index_label.Text = teleport_index.Value
+	index_label.BackgroundTransparency = 1
+	index_label.TextColor3 = Color3.fromRGB(255, 255, 255)
+	index_label.Size = UDim2.new(0, 800, 0, 600)
+	index_label.TextSize = 100
+
+	teleport_index.Value = teleport_index.Value + 1
+
+	local function teleport_2_to_1(whattouchedit)
+		if whattouchedit.Parent:FindFirstChild("Humanoid") ~= nil then
+			local teleport1_name = "teleportpad1" .. "_" .. string.split(teleport2.Name, "_")[2]
+			print("Person touched it")
+			print(teleport1_name)
+			local teleport1 = game.Workspace:FindFirstChild(teleport1_name)
+			teleport1.CanTouch = false
+			teleport2.CanTouch = false
+			LocalPlayer.Character:moveTo(teleport1.Position)
+			wait(3)
+			teleport1.CanTouch = true
+			teleport2.CanTouch = true
+		else
+			print("Something touched it, not a person")
+		end
+	end
+	teleport2.Touched:Connect(teleport_2_to_1)
+end
+
 show_hide_button.MouseButton1Click:Connect(show_hide_gui)
 select_part_button.MouseButton1Click:Connect(select_part)
 pager1_anchor_part_button.MouseButton1Click:Connect(anchor_part)
@@ -967,3 +1134,7 @@ clear_vertices_button.MouseButton1Click:Connect(clear_vertices)
 add_label_button.MouseButton1Click:Connect(add_vertex_label)
 draw_tool_button.MouseButton1Click:Connect(give_draw_tool)
 clear_drawings_button.MouseButton1Click:Connect(clear_drawings)
+get_current_position_button.MouseButton1Click:Connect(get_current_position)
+teleport_to_selected_part_button.MouseButton1Click:Connect(teleport_to_selected_part)
+telepad1_button.MouseButton1Click:Connect(teleport_pad_1)
+telepad2_button.MouseButton1Click:Connect(teleport_pad_2)
