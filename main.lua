@@ -1172,6 +1172,7 @@ function spawn_UFO()
 	UFO.RightSurface = Enum.SurfaceType.Smooth
 	UFO.TopSurface = Enum.SurfaceType.Smooth
 	UFO.Color = Color3.fromRGB(255, 255, 255)
+	UFO.CanCollide = false
 	
 	local UFO_attachment = Instance.new("Attachment")
 	UFO_attachment.Parent = UFO
@@ -1193,6 +1194,42 @@ function spawn_UFO()
 	trail.Parent = UFO
 	trail.Attachment0 = UFO_attachment
 	trail.Attachment1 = head_attachment
+	
+	local billboard_gui = Instance.new("BillboardGui")
+	billboard_gui.Parent = UFO
+	billboard_gui.StudsOffset = Vector3.new(0, 1, 0)
+	billboard_gui.Adornee = UFO
+	billboard_gui.Size = UDim2.new(0, 200, 1, 0) -- {0, 200},{1, 0}
+	
+	local frame = Instance.new("Frame")
+	frame.BackgroundTransparency = 1
+	frame.Parent = billboard_gui
+	frame.Size = UDim2.new(0, 200, 1, 0)
+	
+	local textlabel = Instance.new("TextLabel")
+	textlabel.TextSize = 50
+	textlabel.TextColor3 = Color3.fromRGB(234, 255, 0)
+	textlabel.TextStrokeColor3 = Color3.fromRGB(204, 0, 204)
+	textlabel.TextStrokeTransparency = 0
+	textlabel.Parent = frame
+	textlabel.Size = UDim2.new(0, 200, 1, 0)
+	textlabel.BackgroundTransparency = 1
+	textlabel.Text = ""
+	textlabel.TextScaled = true
+	
+	local Players = game:GetService("Players")
+
+	Players.PlayerAdded:Connect(function(player)
+		textlabel.Text = tostring(player.Name .. " joined the game!")
+		wait(5)
+		textlabel.Text = ""
+	end)
+
+	Players.PlayerRemoving:Connect(function(player)
+		textlabel.Text = tostring(player.Name .. " left the game!")
+		wait(5)
+		textlabel.Text = ""
+	end)
 end
 
 show_hide_button.MouseButton1Click:Connect(show_hide_gui)
