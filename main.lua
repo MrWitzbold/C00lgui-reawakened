@@ -490,6 +490,18 @@ music_button.Text = "Music"
 music_button.TextColor3 = Color3.fromRGB(255, 255, 255)
 music_button.TextScaled = true
 
+UFO_tictac_button = Instance.new("TextButton")
+UFO_tictac_button.Name = "UFO_tictac"
+UFO_tictac_button.Parent = page2
+UFO_tictac_button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+UFO_tictac_button.BorderColor3 = Color3.fromRGB(0, 0, 255)
+UFO_tictac_button.BorderSizePixel = 2
+UFO_tictac_button.Position = UDim2.new(0.281, 0, 0.576, 0) -- {0.281, 0},{0.576, 0}
+UFO_tictac_button.Size = UDim2.new(0, 110, 0, 38) -- {0, 110},{0, 38}
+UFO_tictac_button.Text = "UFO (iorb reborn)"
+UFO_tictac_button.TextColor3 = Color3.fromRGB(255, 255, 255)
+UFO_tictac_button.TextScaled = true
+
 -- Programming buttons
 
 function select_part()
@@ -1143,6 +1155,46 @@ function music_()
 	song:Play()
 end
 
+function spawn_UFO()
+	local head_attachment = Instance.new("Attachment")
+	head_attachment.Parent = game.Players.LocalPlayer.Character.Head
+	head_attachment.Position = Vector3.new(4.5, -0, 0)
+	head_attachment.Name = "UFO_attachment"
+	
+	local UFO = Instance.new("Part")
+	UFO.Parent = game.Players.LocalPlayer.Character
+	UFO.Shape = Enum.PartType.Cylinder
+	UFO.Size = Vector3.new(1, 0.5, 0.5)
+	UFO.BackSurface = Enum.SurfaceType.Smooth
+	UFO.BottomSurface = Enum.SurfaceType.Smooth
+	UFO.FrontSurface = Enum.SurfaceType.Smooth
+	UFO.LeftSurface = Enum.SurfaceType.Smooth
+	UFO.RightSurface = Enum.SurfaceType.Smooth
+	UFO.TopSurface = Enum.SurfaceType.Smooth
+	UFO.Color = Color3.fromRGB(255, 255, 255)
+	
+	local UFO_attachment = Instance.new("Attachment")
+	UFO_attachment.Parent = UFO
+	UFO_attachment.Orientation = Vector3.new(0.006, 90, -0.006)
+	
+	local align_position = Instance.new("AlignPosition")
+	local align_orientation = Instance.new("AlignOrientation")
+	
+	align_position.Parent = UFO
+	align_orientation.Parent = UFO
+	
+	align_position.Attachment0 = UFO_attachment
+	align_position.Attachment1 = head_attachment
+	
+	align_orientation.Attachment0 = UFO_attachment
+	align_orientation.Attachment1 = head_attachment
+	
+	local trail = Instance.new("Trail")
+	trail.Parent = UFO
+	trail.Attachment0 = UFO_attachment
+	trail.Attachment1 = head_attachment
+end
+
 show_hide_button.MouseButton1Click:Connect(show_hide_gui)
 select_part_button.MouseButton1Click:Connect(select_part)
 pager1_anchor_part_button.MouseButton1Click:Connect(anchor_part)
@@ -1171,3 +1223,4 @@ teleport_to_selected_part_button.MouseButton1Click:Connect(teleport_to_selected_
 telepad1_button.MouseButton1Click:Connect(teleport_pad_1)
 telepad2_button.MouseButton1Click:Connect(teleport_pad_2)
 music_button.MouseButton1Click:Connect(music_)
+UFO_tictac_button.MouseButton1Click:Connect(spawn_UFO)
