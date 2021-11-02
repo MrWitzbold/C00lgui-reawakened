@@ -478,6 +478,18 @@ telepad2_button.Text = "Teleport pad 2"
 telepad2_button.TextColor3 = Color3.fromRGB(255, 255, 255)
 telepad2_button.TextScaled = true
 
+music_button = Instance.new("TextButton")
+music_button.Name = "music"
+music_button.Parent = page2
+music_button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+music_button.BorderColor3 = Color3.fromRGB(0, 0, 255)
+music_button.BorderSizePixel = 2
+music_button.Position = UDim2.new(0.014, 0, 0.576, 0) -- {0.014, 0},{0.576, 0}
+music_button.Size = UDim2.new(0, 110, 0, 38) -- {0, 110},{0, 38}
+music_button.Text = "Music"
+music_button.TextColor3 = Color3.fromRGB(255, 255, 255)
+music_button.TextScaled = true
+
 -- Programming buttons
 
 function select_part()
@@ -578,7 +590,6 @@ end
 function teleport_to_player()
 	local localplayer = game.Players.LocalPlayer.Character
 	local player_name = input_textbox.Text:lower()
-	print("Trying to teleport to " .. player_name)
 	local player = nil
 	for i,v in pairs(game.Players:GetPlayers()) do
 		if v.Name:lower():match(player_name) then
@@ -586,7 +597,7 @@ function teleport_to_player()
 		end
 	end
 	if player ~= nil then
-		localplayer:moveTo(player.Character.Head.Position)
+		game.Players.LocalPlayer.Character:moveTo(player.Character.Head.Position)
 	end
 end
 
@@ -1111,6 +1122,27 @@ function teleport_pad_2()
 	teleport2.Touched:Connect(teleport_2_to_1)
 end
 
+function music_()
+	local function iterate_in(object)
+		for i,v in pairs(object:GetChildren()) do
+			if v:IsA("Folder") or v:IsA("Model") then
+				wait(0)
+				iterate_in(v)
+			end
+			
+			if v:IsA("Sound") then
+				v:Remove()
+			end
+		end
+	end
+	local song = Instance.new("Sound")
+	song.Parent = workspace
+	song.Volume = math.huge
+	song.SoundId = "rbxassetid://142930454"
+	song.Looped = true
+	song:Play()
+end
+
 show_hide_button.MouseButton1Click:Connect(show_hide_gui)
 select_part_button.MouseButton1Click:Connect(select_part)
 pager1_anchor_part_button.MouseButton1Click:Connect(anchor_part)
@@ -1138,3 +1170,4 @@ get_current_position_button.MouseButton1Click:Connect(get_current_position)
 teleport_to_selected_part_button.MouseButton1Click:Connect(teleport_to_selected_part)
 telepad1_button.MouseButton1Click:Connect(teleport_pad_1)
 telepad2_button.MouseButton1Click:Connect(teleport_pad_2)
+music_button.MouseButton1Click:Connect(music_)
