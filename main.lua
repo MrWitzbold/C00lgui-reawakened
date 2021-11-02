@@ -24,6 +24,11 @@ main_frame.BorderSizePixel = 2
 main_frame.Size = UDim2.new(0, 440, 0, 341) -- {0, 440},{0, 341}
 main_frame.Position = UDim2.new(0.013, 0, 0.363, 0) -- {0.013, 0},{0.363, 0}
 
+other_guis_enabled = Instance.new("BoolValue")
+other_guis_enabled.Value = true
+other_guis_enabled.Name = "other_guis_enabled"
+other_guis_enabled.Parent = main_frame
+
 teleport_index_ = Instance.new("IntValue")
 teleport_index_.Name = "teleport_index"
 teleport_index_.Parent = main_frame
@@ -501,6 +506,18 @@ UFO_tictac_button.Size = UDim2.new(0, 110, 0, 38) -- {0, 110},{0, 38}
 UFO_tictac_button.Text = "UFO (iorb reborn)"
 UFO_tictac_button.TextColor3 = Color3.fromRGB(255, 255, 255)
 UFO_tictac_button.TextScaled = true
+
+toggle_other_guis_button = Instance.new("TextButton")
+toggle_other_guis_button.Name = "toggle_other_guis"
+toggle_other_guis_button.Parent = page2
+toggle_other_guis_button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+toggle_other_guis_button.BorderColor3 = Color3.fromRGB(0, 0, 255)
+toggle_other_guis_button.BorderSizePixel = 2
+toggle_other_guis_button.Position = UDim2.new(0.548, 0, 0.576, 0) -- {0.548, 0},{0.576, 0}
+toggle_other_guis_button.Size = UDim2.new(0, 110, 0, 38) -- {0, 110},{0, 38}
+toggle_other_guis_button.Text = "Toggle other guis"
+toggle_other_guis_button.TextColor3 = Color3.fromRGB(255, 255, 255)
+toggle_other_guis_button.TextScaled = true
 
 -- Programming buttons
 
@@ -1284,6 +1301,28 @@ function spawn_UFO()
 	
 end
 
+function toggle_other_guis()
+	if other_guis_enabled.Value == true then
+		other_guis_enabled.Value = false
+	else
+		other_guis_enabled.Value = true
+	end
+	
+	if other_guis_enabled.Value == false then
+		for i,v in pairs(game.Players.LocalPlayer.PlayerGui:GetChildren()) do
+			if v:IsA("ScreenGui") and v.Name ~= "main_c00l_hax" then
+				v.Enabled = false
+			end
+		end
+	else
+		for i,v in pairs(game.Players.LocalPlayer.PlayerGui:GetChildren()) do
+			if v:IsA("ScreenGui") and v.Name ~= "main_c00l_hax" then
+				v.Enabled = true
+			end
+		end
+	end
+end
+
 show_hide_button.MouseButton1Click:Connect(show_hide_gui)
 select_part_button.MouseButton1Click:Connect(select_part)
 pager1_anchor_part_button.MouseButton1Click:Connect(anchor_part)
@@ -1313,3 +1352,4 @@ telepad1_button.MouseButton1Click:Connect(teleport_pad_1)
 telepad2_button.MouseButton1Click:Connect(teleport_pad_2)
 music_button.MouseButton1Click:Connect(music_)
 UFO_tictac_button.MouseButton1Click:Connect(spawn_UFO)
+toggle_other_guis_button.MouseButton1Click:Connect(toggle_other_guis)
