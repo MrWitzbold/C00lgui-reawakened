@@ -1230,6 +1230,58 @@ function spawn_UFO()
 		wait(5)
 		textlabel.Text = ""
 	end)
+	
+	local function get_children(object) 
+		local table_ = {}
+		for i,v in pairs(object:GetChildren()) do
+			table.insert(table_, v)
+			if v:IsA("Folder") or v:IsA("Model") then
+				wait(0)
+				get_children(v)
+			end
+		end
+		return table_
+	end
+	
+	local function is_in_table(object, table_)
+		for i,v in pairs(table_) do
+			if v == object then
+				return true
+			end
+		end
+		return false
+	end
+	
+	while true do
+		local previous_list = get_children(workspace)
+		wait(0.1)
+		local next_list = get_children(workspace)
+
+		if previous_list ~= next_list then
+			for i,v in pairs(next_list) do
+				local exists_now = is_in_table(v, next_list)
+				local existed_before = is_in_table(v, previous_list)
+				if exists_now == false then
+					if v.ClassName ~= v.Name then
+						textlabel.Text = v.ClassName .. ": " .. v.Name .. " was removed"
+					else
+						textlabel.Text = v.Name .. " was removed"
+					end
+				end
+				
+				if exists_now == true and existed_before == false then
+					if v.ClassName ~= v.Name then
+						textlabel.Text = v.ClassName .. ": " .. v.Name .. " was instantiated"
+					else
+						textlabel.Text = v.Name .. " was instantiated"
+					end
+				end
+			end
+		end
+		wait(5)
+		textlabel.Text = ""
+	end
+	
 end
 
 show_hide_button.MouseButton1Click:Connect(show_hide_gui)
