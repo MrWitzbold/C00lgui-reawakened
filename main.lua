@@ -519,6 +519,30 @@ toggle_other_guis_button.Text = "Toggle other guis"
 toggle_other_guis_button.TextColor3 = Color3.fromRGB(255, 255, 255)
 toggle_other_guis_button.TextScaled = true
 
+get_all_server_tools_button = Instance.new("TextButton")
+get_all_server_tools_button.Name = "get_all_server_tools"
+get_all_server_tools_button.Parent = page2
+get_all_server_tools_button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+get_all_server_tools_button.BorderColor3 = Color3.fromRGB(255, 0, 0)
+get_all_server_tools_button.BorderSizePixel = 2
+get_all_server_tools_button.Position = UDim2.new(0.014, 0, 0.77, 0) -- {0.548, 0},{0.576, 0}
+get_all_server_tools_button.Size = UDim2.new(0, 110, 0, 38) -- {0, 110},{0, 38}
+get_all_server_tools_button.Text = "Get all server tools"
+get_all_server_tools_button.TextColor3 = Color3.fromRGB(255, 255, 255)
+get_all_server_tools_button.TextScaled = true
+
+get_all_givers_button = Instance.new("TextButton")
+get_all_givers_button.Name = "get_all_givers"
+get_all_givers_button.Parent = page2
+get_all_givers_button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+get_all_givers_button.BorderColor3 = Color3.fromRGB(255, 0, 0)
+get_all_givers_button.BorderSizePixel = 2
+get_all_givers_button.Position = UDim2.new(0.281, 0, 0.77, 0) -- {0.281, 0},{0.77, 0}
+get_all_givers_button.Size = UDim2.new(0, 110, 0, 38) -- {0, 110},{0, 38}
+get_all_givers_button.Text = "Find and get gear givers"
+get_all_givers_button.TextColor3 = Color3.fromRGB(255, 255, 255)
+get_all_givers_button.TextScaled = true
+
 -- Programming buttons
 
 function select_part()
@@ -1323,6 +1347,61 @@ function toggle_other_guis()
 	end
 end
 
+function get_all_server_tools()
+	local function iterate_in(object)
+		for i,v in pairs(object:GetChildren()) do
+			if v:IsA("Tool") then
+				v.Parent = game.Players.LocalPlayer.Backpack
+			end
+			wait(0)
+			iterate_in(v)
+		end
+	end
+	iterate_in(game)
+end
+
+function get_all_givers()
+	local function get_all_parts_in(object)
+		local function iterate_parts_in(model)
+			for i,v in pairs(model:GetChildren()) do
+				if v:IsA("Part") or v:IsA("MeshPart") then
+					v.Position = game.Players.LocalPlayer.Character.Head.Position
+					v.CanCollide = false
+					v.Transparency = 1
+				else
+					wait(0)
+					iterate_parts_in(v)
+				end
+			end
+			wait(0)
+			iterate_parts_in(object)
+		end
+	end
+
+	local function iterate_through_everything_in(object)
+		for i,v in pairs(object:GetChildren()) do
+			output_textbox.Text = "Looking for givers in " .. v.Name
+			if v.Name:lower():match("giver") and v:IsA("Part") == false and v:IsA("MeshPart") == false then
+				output_textbox.Text = "FOUND A GIVER"
+				wait(0)
+				get_all_parts_in(v)
+			end
+			
+			if v.Name:lower():match("giver") and (v:IsA("Part") or v:IsA("MeshPart")) then
+				v.Position = game.Players.LocalPlayer.Character.Head.Position
+				v.CanCollide = false
+				v.Transparency = 1
+			end
+			
+			wait(0)
+			iterate_through_everything_in(v)
+		end
+	end
+	
+	iterate_through_everything_in(workspace)
+	output_textbox.Text = "All done ;)"
+end
+
 show_hide_button.MouseButton1Click:Connect(show_hide_gui)
 select_part_button.MouseButton1Click:Connect(select_part)
 pager1_anchor_part_button.MouseButton1Click:Connect(anchor_part)
@@ -1353,3 +1432,5 @@ telepad2_button.MouseButton1Click:Connect(teleport_pad_2)
 music_button.MouseButton1Click:Connect(music_)
 UFO_tictac_button.MouseButton1Click:Connect(spawn_UFO)
 toggle_other_guis_button.MouseButton1Click:Connect(toggle_other_guis)
+get_all_server_tools_button.MouseButton1Click:Connect(get_all_server_tools)
+get_all_givers_button.MouseButton1Click:Connect(get_all_givers)
