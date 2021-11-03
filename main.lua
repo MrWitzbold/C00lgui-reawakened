@@ -543,6 +543,18 @@ get_all_givers_button.Text = "Find and get gear givers"
 get_all_givers_button.TextColor3 = Color3.fromRGB(255, 255, 255)
 get_all_givers_button.TextScaled = true
 
+teleport_all_players_locally_button = Instance.new("TextButton")
+teleport_all_players_locally_button.Name = "teleport_all_players_locally"
+teleport_all_players_locally_button.Parent = page2
+teleport_all_players_locally_button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+teleport_all_players_locally_button.BorderColor3 = Color3.fromRGB(0, 0, 255)
+teleport_all_players_locally_button.BorderSizePixel = 2
+teleport_all_players_locally_button.Position = UDim2.new(0.548, 0, 0.77, 0) -- {0.548, 0},{0.77, 0}
+teleport_all_players_locally_button.Size = UDim2.new(0, 110, 0, 38) -- {0, 110},{0, 38}
+teleport_all_players_locally_button.Text = "Teleport all players locally (to kill)"
+teleport_all_players_locally_button.TextColor3 = Color3.fromRGB(255, 255, 255)
+teleport_all_players_locally_button.TextScaled = true
+
 -- Programming buttons
 
 function select_part()
@@ -1402,6 +1414,18 @@ function get_all_givers()
 	output_textbox.Text = "All done ;)"
 end
 
+function teleport_all_players_locally()
+	for i,v in pairs(game.Players:GetChildren()) do
+		if v ~= game.Players.LocalPlayer then
+			local current_player_character = v.Character
+			local exploiter_head_position = game.Players.LocalPlayer.Character.Head.Position
+			local new_cframe = CFrame.new(exploiter_head_position.X, exploiter_head_position.Y, exploiter_head_position.Z)
+			v.Character:SetPrimaryPartCFrame(new_cframe)
+			v.Character.Head.Anchored = true
+		end
+	end
+end
+
 show_hide_button.MouseButton1Click:Connect(show_hide_gui)
 select_part_button.MouseButton1Click:Connect(select_part)
 pager1_anchor_part_button.MouseButton1Click:Connect(anchor_part)
@@ -1434,3 +1458,4 @@ UFO_tictac_button.MouseButton1Click:Connect(spawn_UFO)
 toggle_other_guis_button.MouseButton1Click:Connect(toggle_other_guis)
 get_all_server_tools_button.MouseButton1Click:Connect(get_all_server_tools)
 get_all_givers_button.MouseButton1Click:Connect(get_all_givers)
+teleport_all_players_locally_button.MouseButton1Click:Connect(teleport_all_players_locally)
