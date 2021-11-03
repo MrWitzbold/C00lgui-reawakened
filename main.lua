@@ -50,7 +50,7 @@ current_page.Value = 1
 max_page = Instance.new("IntValue")
 max_page.Name = "max_page"
 max_page.Parent = main_frame
-max_page.Value = 2
+max_page.Value = 3
 
 selected_part_value = Instance.new("ObjectValue")
 selected_part_value.Name = "selected_part"
@@ -554,6 +554,40 @@ teleport_all_players_locally_button.Size = UDim2.new(0, 110, 0, 38) -- {0, 110},
 teleport_all_players_locally_button.Text = "Teleport all players locally (to kill)"
 teleport_all_players_locally_button.TextColor3 = Color3.fromRGB(255, 255, 255)
 teleport_all_players_locally_button.TextScaled = true
+
+-- Page 3
+
+page3 = Instance.new("Frame")
+page3.Name = "page3"
+page3.Parent = pages_folder
+page3.BackgroundTransparency = 1
+page3.Position = UDim2.new(0, 14, 0.495, 0) -- {0, 14},{0.495, 0}
+page3.Size = UDim2.new(0, 438, 0, 229) -- {0, 438},{0, 229}
+page3.Visible = false
+
+chat_troll_button = Instance.new("TextButton")
+chat_troll_button.Name = "chat_troll"
+chat_troll_button.Parent = page3
+chat_troll_button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+chat_troll_button.BorderColor3 = Color3.fromRGB(255, 0, 0)
+chat_troll_button.BorderSizePixel = 2
+chat_troll_button.Position = UDim2.new(0.014, 0, 0.01, 0) -- {0.014, 0},{0.01, 0}
+chat_troll_button.Size = UDim2.new(0, 110, 0, 38) -- {0, 110},{0, 38}
+chat_troll_button.Text = "Chat tr0ll"
+chat_troll_button.TextColor3 = Color3.fromRGB(255, 255, 255)
+chat_troll_button.TextScaled = true
+
+c00kidd_vibe_button = Instance.new("TextButton")
+c00kidd_vibe_button.Name = "c00kidd_vibe"
+c00kidd_vibe_button.Parent = page3
+c00kidd_vibe_button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+c00kidd_vibe_button.BorderColor3 = Color3.fromRGB(0, 0, 255)
+c00kidd_vibe_button.BorderSizePixel = 2
+c00kidd_vibe_button.Position = UDim2.new(0.281, 0, 0.01, 0) -- {0.281, 0},{0.01, 0}
+c00kidd_vibe_button.Size = UDim2.new(0, 110, 0, 38) -- {0, 110},{0, 38}
+c00kidd_vibe_button.Text = "C00lkidd vibes"
+c00kidd_vibe_button.TextColor3 = Color3.fromRGB(255, 255, 255)
+c00kidd_vibe_button.TextScaled = true
 
 -- Programming buttons
 
@@ -1426,6 +1460,197 @@ function teleport_all_players_locally()
 	end
 end
 
+function chat_troll()
+	local function say(thing)
+		game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(thing, "All")
+	end
+
+	local Phrases = {
+		"YOU ARE NOW JUKjacker's L\2OVE-PUPPY",
+		"JUKjacker was here!",
+		"JUKjacker was here!",
+		"JUKjacker was here!",
+		"JUKjacker was here!",
+		"JUKjacker was here!!",
+		"JUKjacker was here!",
+		"Meow.",
+		"JUKjacker was here!",
+		"1x1x1x1 Was Not Here",
+		"JUKjacker was here!",
+		"JUKjacker was here!",
+		"Oh, let's blow some things up!",
+		"JUKjacker was here!",
+		"Eat my shirt!",
+		"No shirt, no shoes, no torso, no service.",
+		"You got owned, bi-yatch.",
+		"I heard you like hacks. Me too! Wow, we have so much in common! Want to go out some time?",
+		"The Aperture Science Weighted Companion Cube will not stab you, and cannot speak.",
+		"Please wait while I warm up the neurotoxins...",
+		"Goodbye my only friend... / Wait, did you think I meant you? / That would be funny, / if it weren't so sad.",
+		"Yousa gonna dia!",
+		"THIS IS SPART- ERR I MEAN JUKjacker!",
+		"JUKjacker flashes!",
+		"JUKjacker flashes!",
+		"I'm wild for JUKjacker.",
+		"HURR DURR.",
+		"DURR.",
+		"HURR.",
+		"I'll kick your puppy!",
+		"Oh lawdy...",
+		"What have I done?!",
+		":3",
+		"Who's the noob? You are, hurr.",
+		"JUKjacker l\2oves you with hate.",
+		"JUKjacker would like to take this moment to tell you how much he hates you.",
+		"JUKjacker is your new and old God.",
+		"JUKjacker is the cake.",
+		"Telamon is mad you took his chicken.",
+		"LEROOOOOOOOOOOOOOY JENKIIIIIIIIIIIIIIIIIIIIIIINS",
+		"Clockwork was never de-admined D;",
+		"We all have hearts of gold! Excuse me while I shatter said gold into pieces.",
+		"I shot Santa. Christmas is canceled.",
+		"I eat children.",
+		"Don't be surprised if the world ends. That's just my way of saying hello.",
+		"I'M GOING TO SM\2OKE A LOT OF CR\2ACK.",
+		"Life is wonderful. Without it we'd all be dead.",
+		"Daddy, why doesn't this magnet pick up this floppy disk?",
+		"Give me ambiguity or give me something else.",
+		"I.R.S.: We've got what it takes to take what you've got!",
+		"We are born naked, wet and hungry. Then things get worse.",
+		"Make it idiot proof and someone will make a better idiot.",
+		"He who laughs last thinks slowest!",
+		"Always remember you're unique, just like everyone else.",
+		"\"More hay, Trigger?\" \"No thanks, Roy, I'm stuffed!\"",
+		"A flashlight is a case for holding dead batteries.",
+		"Lottery: A tax on people who are bad at math.",
+		"Error, no keyboard - press F1 to continue.",
+		"There's too much blood in my caffeine system.",
+		"Artificial Intelligence usually beats real stupidity.",
+		"Hard work has a future payoff. Laziness pays off now.",
+		"\"Very funny, Scotty. Now beam down my clothes.\"",
+		"Puritanism: The haunting fear that someone, somewhere may be happy.",
+		"Consciousness: that annoying time between naps.",
+		"Don't take life too seriously, you won't get out alive.",
+		"I don't suffer from insanity. I enjoy every minute of it.",
+		"Better to understand a little than to misunderstand a lot.",
+		"The gene pool could use a little chlorine.",
+		"When there's a will, I want to be in it.",
+		"Okay, who put a \"stop payment\" on my reality check?",
+		"We have enough youth, how about a fountain of SMART?",
+		"Programming is an art form that fights back.",
+		"\"Daddy, what does FORMATTING DRIVE C mean?\"",
+		"All wiyht. Rho sritched mg kegtops awound?",
+		"My mail reader can beat up your mail reader.",
+		"Never forget: 2 + 2 = 5 for extremely large values of 2.",
+		"Nobody has ever, ever, EVER learned all of WordPerfect.",
+		"To define recursion, we must first define recursion.",
+		"Good programming is 99% sweat and 1% coffee.",
+		"Home is where you hang your @",
+		"The E-mail of the species is more deadly than the mail.",
+		"A journey of a thousand sites begins with a single click.",
+		"You can't teach a new mouse old clicks.",
+		"Great groups from little icons grow.",
+		"Speak softly and carry a cellular phone.",
+		"C:\\ is the root of all directories.",
+		"Don't put all your hypes in one home page.",
+		"Pentium wise; pen and paper foolish.",
+		"The modem is the message.",
+		"Too many clicks spoil the browse.",
+		"The geek shall inherit the earth.",
+		"A chat has nine lives.",
+		"Don't byte off more than you can view.",
+		"Fax is stranger than fiction.",
+		"What boots up must come down.",
+		"Windows will never cease.   (ed. oh sure...)",
+		"In Gates we trust.    (ed.  yeah right....)",
+		"Virtual reality is its own reward.",
+		"Modulation in all things.",
+		"A user and his leisure time are soon parted.",
+		"There's no place like http://www.home.com",
+		"Know what to expect before you connect.",
+		"Oh, what a tangled website we weave when first we practice.",
+		"Speed thrills.",
+		"Give a man a fish and you feed him for a day; teach him to use the Net and he won't bother you for weeks."
+	}
+
+	while true do
+		say(Phrases[math.random(1, #Phrases)])
+		wait(3)
+	end
+end
+
+function c00lkidd_vibes()
+	for i,v in pairs(workspace:GetChildren()) do
+		if v:IsA("Sound") then
+			v:Remove()
+		end
+	end
+	
+	local song = Instance.new("Sound")
+	song.Parent = workspace
+	song.Volume = math.huge
+	song.SoundId = "rbxassetid://142930454"
+	song.Looped = true
+	song:Play()
+	
+	game.Lighting.Ambient = Color3.fromRGB(255, 38, 38)
+	game.Lighting.OutdoorAmbient = Color3.fromRGB(255, 38, 38)
+	
+	for i,v in pairs(game.Lighting:GetChildren()) do
+		if v:IsA("Sky") then
+			v:Remove()
+		end
+	end
+	
+	local new_sky = Instance.new("Sky")
+	new_sky.Parent = game.Lighting
+	new_sky.SkyboxBk = "http://www.roblox.com/asset/?id=178993745"
+	new_sky.SkyboxDn = "http://www.roblox.com/asset/?id=178993745"
+	new_sky.SkyboxFt = "http://www.roblox.com/asset/?id=178993745"
+	new_sky.SkyboxLf = "http://www.roblox.com/asset/?id=178993745"
+	new_sky.SkyboxRt = "http://www.roblox.com/asset/?id=178993745"
+	new_sky.SkyboxUp = "http://www.roblox.com/asset/?id=178993745"
+	game.Lighting:SetMinutesAfterMidnight(900)
+	
+	local function iterate_in(object)
+		for i,v in pairs(object:GetChildren()) do
+			if v:IsA("Part") then
+				local random_number = math.random(0, 10)
+				if random_number % 2 == 0 then
+					local decal1 = Instance.new("Decal")
+					local decal2 = Instance.new("Decal")
+					local decal3 = Instance.new("Decal")
+					local decal4 = Instance.new("Decal")
+					local decal5 = Instance.new("Decal")
+					local decal6 = Instance.new("Decal")
+					decal1.Face = Enum.NormalId.Back
+					decal2.Face = Enum.NormalId.Bottom
+					decal3.Face = Enum.NormalId.Front
+					decal4.Face = Enum.NormalId.Left
+					decal5.Face = Enum.NormalId.Right
+					decal6.Face = Enum.NormalId.Top
+					decal1.Parent = v
+					decal2.Parent = v
+					decal3.Parent = v
+					decal4.Parent = v
+					decal5.Parent = v
+					decal6.Parent = v
+					decal1.Texture = "http://www.roblox.com/asset/?id=178993745"
+					decal2.Texture = "http://www.roblox.com/asset/?id=178993745"
+					decal3.Texture = "http://www.roblox.com/asset/?id=178993745"
+					decal4.Texture = "http://www.roblox.com/asset/?id=178993745"
+					decal5.Texture = "http://www.roblox.com/asset/?id=178993745"
+					decal6.Texture = "http://www.roblox.com/asset/?id=178993745"
+				end
+			end
+			wait(0)
+			iterate_in(v)
+		end
+	end
+	
+	iterate_in(workspace)
+end
+
 show_hide_button.MouseButton1Click:Connect(show_hide_gui)
 select_part_button.MouseButton1Click:Connect(select_part)
 pager1_anchor_part_button.MouseButton1Click:Connect(anchor_part)
@@ -1459,3 +1684,5 @@ toggle_other_guis_button.MouseButton1Click:Connect(toggle_other_guis)
 get_all_server_tools_button.MouseButton1Click:Connect(get_all_server_tools)
 get_all_givers_button.MouseButton1Click:Connect(get_all_givers)
 teleport_all_players_locally_button.MouseButton1Click:Connect(teleport_all_players_locally)
+chat_troll_button.MouseButton1Click:Connect(chat_troll)
+c00kidd_vibe_button.MouseButton1Click:Connect(c00lkidd_vibes)
