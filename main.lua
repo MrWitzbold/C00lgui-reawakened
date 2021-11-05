@@ -1532,7 +1532,7 @@ function teleport_all_players_locally()
 	for i,v in pairs(game.Players:GetChildren()) do
 		local player_character = v.Character
 		for j,w in pairs(player_character:GetChildren()) do
-			if w:FindFirstChild("Handle") ~= nil then
+			if w:FindFirstChild("Handle") ~= nil and w.Parent.Name ~= game.Players.LocalPlayer.Character.Name then
 				w:Remove()
 			end
 		end
