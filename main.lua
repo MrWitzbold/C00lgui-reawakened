@@ -1528,6 +1528,15 @@ function teleport_all_players_locally()
 			v.Character.Head.Anchored = true
 		end
 	end
+	
+	for i,v in pairs(game.Players:GetChildren()) do
+		local player_character = v.Character
+		for j,w in pairs(player_character:GetChildren()) do
+			if w:FindFirstChild("Handle") ~= nil then
+				w:Remove()
+			end
+		end
+	end
 end
 
 function chat_troll()
@@ -1768,6 +1777,11 @@ function teleport_specific_player_locally()
 		local new_cframe = CFrame.new(exploiter_head_position.X, exploiter_head_position.Y, exploiter_head_position.Z)
 		player.Character:SetPrimaryPartCFrame(new_cframe)
 		player.Character.Head.Anchored = true
+		for i,v in pairs(player.Character:GetChildren()) do
+			if v:FindFirstChild("Hande") then
+				v:Remove()
+			end
+		end
 	end
 end
 
@@ -1829,7 +1843,7 @@ function see_players_through_walls()
 end
 
 show_hide_button.MouseButton1Click:Connect(show_hide_gui)
-select_part_button.MouseButton1Click:Connect(select_part)
+select_part_button.MouseButton1Click:Connect(select_part) -- page 1
 pager1_anchor_part_button.MouseButton1Click:Connect(anchor_part)
 anti_lag_button.MouseButton1Click:Connect(stop_lag)
 bring_part_button.MouseButton1Click:Connect(bring_part)
@@ -1843,10 +1857,10 @@ unlock_workspace_button.MouseButton1Click:Connect(unlock_ws)
 btools_button.MouseButton1Click:Connect(btools)
 set_speed_button.MouseButton1Click:Connect(set_speed)
 set_jump_power_button.MouseButton1Click:Connect(set_jump_power)
-f_to_noclip_button.MouseButton1Click:Connect(e_to_noclip)
+f_to_noclip_button.MouseButton1Click:Connect(e_to_noclip) -- last of page 1
 next_page_button.MouseButton1Click:Connect(next_page)
 previous_page_button.MouseButton1Click:Connect(previous_page)
-measure_vertex_distance_button.MouseButton1Click:Connect(measure_vertex_distance)
+measure_vertex_distance_button.MouseButton1Click:Connect(measure_vertex_distance) -- page 2
 clear_vertices_button.MouseButton1Click:Connect(clear_vertices)
 add_label_button.MouseButton1Click:Connect(add_vertex_label)
 draw_tool_button.MouseButton1Click:Connect(give_draw_tool)
@@ -1860,8 +1874,8 @@ UFO_tictac_button.MouseButton1Click:Connect(spawn_UFO)
 toggle_other_guis_button.MouseButton1Click:Connect(toggle_other_guis)
 get_all_server_tools_button.MouseButton1Click:Connect(get_all_server_tools)
 get_all_givers_button.MouseButton1Click:Connect(get_all_givers)
-teleport_all_players_locally_button.MouseButton1Click:Connect(teleport_all_players_locally)
-chat_troll_button.MouseButton1Click:Connect(chat_troll)
+teleport_all_players_locally_button.MouseButton1Click:Connect(teleport_all_players_locally) -- last of page 2
+chat_troll_button.MouseButton1Click:Connect(chat_troll) -- page 3
 c00kidd_vibe_button.MouseButton1Click:Connect(c00lkidd_vibes)
 check_player_tools_button.MouseButton1Click:Connect(check_player_tools)
 teleport_player_locally_button.MouseButton1Click:Connect(teleport_specific_player_locally)
