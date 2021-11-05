@@ -60,6 +60,14 @@ bypassed_fly_active = Instance.new("BoolValue")
 bypassed_fly_active.Parent = main_frame
 bypassed_fly_active.Value = false
 
+chat_troll_active = Instance.new("BoolValue")
+chat_troll_active.Parent = main_frame
+chat_troll_active.Value = false
+
+teleport_troll_active = Instance.new("BoolValue")
+teleport_troll_active.Parent = main_frame
+teleport_troll_active.Value = false
+
 blue_label = Instance.new("TextButton")
 blue_label.Name = "blue_label"
 blue_label.Parent = main_frame
@@ -555,6 +563,8 @@ teleport_all_players_locally_button.Text = "Teleport all players locally (to kil
 teleport_all_players_locally_button.TextColor3 = Color3.fromRGB(255, 255, 255)
 teleport_all_players_locally_button.TextScaled = true
 
+
+
 -- Page 3
 
 page3 = Instance.new("Frame")
@@ -573,7 +583,7 @@ chat_troll_button.BorderColor3 = Color3.fromRGB(255, 0, 0)
 chat_troll_button.BorderSizePixel = 2
 chat_troll_button.Position = UDim2.new(0.014, 0, 0.01, 0) -- {0.014, 0},{0.01, 0}
 chat_troll_button.Size = UDim2.new(0, 110, 0, 38) -- {0, 110},{0, 38}
-chat_troll_button.Text = "Chat tr0ll"
+chat_troll_button.Text = "Toggle chat tr0ll"
 chat_troll_button.TextColor3 = Color3.fromRGB(255, 255, 255)
 chat_troll_button.TextScaled = true
 
@@ -588,6 +598,66 @@ c00kidd_vibe_button.Size = UDim2.new(0, 110, 0, 38) -- {0, 110},{0, 38}
 c00kidd_vibe_button.Text = "C00lkidd vibes"
 c00kidd_vibe_button.TextColor3 = Color3.fromRGB(255, 255, 255)
 c00kidd_vibe_button.TextScaled = true
+
+check_player_tools_button = Instance.new("TextButton")
+check_player_tools_button.Name = "check_player_tools"
+check_player_tools_button.Parent = page3
+check_player_tools_button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+check_player_tools_button.BorderColor3 = Color3.fromRGB(255, 0, 0)
+check_player_tools_button.BorderSizePixel = 2
+check_player_tools_button.Position = UDim2.new(0.548, 0, 0.01, 0) -- {0.548, 0},{0.01, 0}
+check_player_tools_button.Size = UDim2.new(0, 110, 0, 38) -- {0, 110},{0, 38}
+check_player_tools_button.Text = "Check player's tools"
+check_player_tools_button.TextColor3 = Color3.fromRGB(255, 255, 255)
+check_player_tools_button.TextScaled = true
+
+teleport_player_locally_button = Instance.new("TextButton")
+teleport_player_locally_button.Name = "teleport_player_locally"
+teleport_player_locally_button.Parent = page3
+teleport_player_locally_button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+teleport_player_locally_button.BorderColor3 = Color3.fromRGB(255, 0, 0)
+teleport_player_locally_button.BorderSizePixel = 2
+teleport_player_locally_button.Position = UDim2.new(0.014, 0, 0.188, 0) -- {0.014, 0},{0.031, 0}
+teleport_player_locally_button.Size = UDim2.new(0, 110, 0, 38) -- {0, 110},{0, 38}
+teleport_player_locally_button.Text = "Teleport player locally (to kill)"
+teleport_player_locally_button.TextColor3 = Color3.fromRGB(255, 255, 255)
+teleport_player_locally_button.TextScaled = true
+
+get_platform_button = Instance.new("TextButton")
+get_platform_button.Name = "get_platform"
+get_platform_button.Parent = page3
+get_platform_button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+get_platform_button.BorderColor3 = Color3.fromRGB(0, 0, 255)
+get_platform_button.BorderSizePixel = 2
+get_platform_button.Position = UDim2.new(0.281, 0, 0.188, 0) -- {0.281, 0},{0.188, 0}
+get_platform_button.Size = UDim2.new(0, 110, 0, 38) -- {0, 110},{0, 38}
+get_platform_button.Text = "Platform"
+get_platform_button.TextColor3 = Color3.fromRGB(255, 255, 255)
+get_platform_button.TextSize = 16
+
+toggle_teleport_troll_button = Instance.new("TextButton")
+toggle_teleport_troll_button.Name = "toggle_teleport_troll"
+toggle_teleport_troll_button.Parent = page3
+toggle_teleport_troll_button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+toggle_teleport_troll_button.BorderColor3 = Color3.fromRGB(255, 0, 0)
+toggle_teleport_troll_button.BorderSizePixel = 2
+toggle_teleport_troll_button.Position = UDim2.new(0.548, 0, 0.188, 0) -- {0.548, 0},{0.188, 0}
+toggle_teleport_troll_button.Size = UDim2.new(0, 110, 0, 38) -- {0, 110},{0, 38}
+toggle_teleport_troll_button.Text = "Teleport troll"
+toggle_teleport_troll_button.TextColor3 = Color3.fromRGB(255, 255, 255)
+toggle_teleport_troll_button.TextScaled = true
+
+make_players_visible_button = Instance.new("TextButton")
+make_players_visible_button.Name = "make_players_visible"
+make_players_visible_button.Parent = page3
+make_players_visible_button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+make_players_visible_button.BorderColor3 = Color3.fromRGB(0, 0, 255)
+make_players_visible_button.BorderSizePixel = 2
+make_players_visible_button.Position = UDim2.new(0.014, 0, 0.382, 0) -- {0.014, 0},{0.382, 0}
+make_players_visible_button.Size = UDim2.new(0, 110, 0, 38) -- {0, 110},{0, 38}
+make_players_visible_button.Text = "See players through walls"
+make_players_visible_button.TextColor3 = Color3.fromRGB(255, 255, 255)
+make_players_visible_button.TextScaled = true
 
 -- Programming buttons
 
@@ -1572,8 +1642,14 @@ function chat_troll()
 		"Speed thrills.",
 		"Give a man a fish and you feed him for a day; teach him to use the Net and he won't bother you for weeks."
 	}
-
-	while true do
+	
+	if chat_troll_active.Value == true then
+		chat_troll_active.Value = false
+	else
+		chat_troll_active.Value = true
+	end
+	
+	while chat_troll_active.Value == true do
 		say(Phrases[math.random(1, #Phrases)])
 		wait(3)
 	end
@@ -1651,6 +1727,107 @@ function c00lkidd_vibes()
 	iterate_in(workspace)
 end
 
+function check_player_tools()
+	local player_name = input_textbox.Text
+	local player = nil
+	for i,v in pairs(game.Players:GetChildren()) do
+		if v.Name:lower():match(player_name:lower()) then
+			player = v
+		end
+	end
+	if player == nil then
+		output_textbox.Text = "Invalid player"
+	else
+		local backpack = player.Backpack
+		local output = ""
+		
+		for i,v in pairs(backpack:GetChildren()) do
+			if i == 1 then
+				output = output .. v.Name
+			else
+				output = output .. ", " .. v.Name
+			end
+		end
+		output_textbox.Text = output
+	end
+end
+
+function teleport_specific_player_locally()
+	local player_name = input_textbox.Text
+	local player = nil
+	for i,v in pairs(game.Players:GetChildren()) do
+		if v.Name:lower():match(player_name:lower()) then
+			player = v
+		end
+	end
+	if player == nil then
+		output_textbox.Text = "Invalid player"
+	else
+		local current_player_character = player.Character
+		local exploiter_head_position = game.Players.LocalPlayer.Character.Head.Position
+		local new_cframe = CFrame.new(exploiter_head_position.X, exploiter_head_position.Y, exploiter_head_position.Z)
+		player.Character:SetPrimaryPartCFrame(new_cframe)
+		player.Character.Head.Anchored = true
+	end
+end
+
+function make_platform()
+	local platform = Instance.new("Part")
+	platform.Size = Vector3.new(16, 1, 16)
+	platform.Transparency = 0.5
+	platform.Color = Color3.fromRGB(255, 0, 255)
+	platform.Anchored = true
+	platform.Parent = workspace
+	local player_position = game.Players.LocalPlayer.Character.Head.Position
+	platform.Position = Vector3.new(player_position.X, player_position.Y-5, player_position.Z)
+end
+
+function toggle_teleport_troll()
+	if teleport_troll_active.Value == true then
+		teleport_troll_active = false
+	else
+		teleport_troll_active = true
+	end
+	
+	while teleport_troll_active.Value == true do
+		for i,v in pairs(game.Players:GetChildren()) do
+			local current_player_character = v.Character
+			game.Players.LocalPlayer.Character:moveTo(current_player_character.Head.Position)
+			wait(0.1)
+		end
+		wait(0.1)
+	end
+end
+
+function see_players_through_walls()
+	for i,v in pairs(game.Players:GetChildren()) do
+		local player_head = v.Character.Head
+		
+		local billboard_gui = Instance.new("BillboardGui")
+		billboard_gui.Parent = player_head
+		billboard_gui.StudsOffset = Vector3.new(0, 1.5, 0)
+		billboard_gui.Adornee = player_head
+		billboard_gui.Size = UDim2.new(0, 200, 1, 0) -- {0, 200},{1, 0}
+		billboard_gui.AlwaysOnTop = true
+
+		local frame = Instance.new("Frame")
+		frame.BackgroundTransparency = 1
+		frame.Parent = billboard_gui
+		frame.Size = UDim2.new(0, 200, 1, 0)
+
+		local textlabel = Instance.new("TextLabel")
+		textlabel.TextSize = 50
+		textlabel.TextColor3 = Color3.fromRGB(255, 0, 0)
+		textlabel.TextStrokeColor3 = Color3.fromRGB(255, 255, 255)
+		textlabel.TextStrokeTransparency = 0
+		textlabel.Parent = frame
+		textlabel.Size = UDim2.new(0, 200, 1, 0)
+		textlabel.BackgroundTransparency = 1
+		textlabel.Text = player_head.Parent.Name
+		textlabel.TextScaled = true
+	end
+end
+
 show_hide_button.MouseButton1Click:Connect(show_hide_gui)
 select_part_button.MouseButton1Click:Connect(select_part)
 pager1_anchor_part_button.MouseButton1Click:Connect(anchor_part)
@@ -1686,3 +1863,8 @@ get_all_givers_button.MouseButton1Click:Connect(get_all_givers)
 teleport_all_players_locally_button.MouseButton1Click:Connect(teleport_all_players_locally)
 chat_troll_button.MouseButton1Click:Connect(chat_troll)
 c00kidd_vibe_button.MouseButton1Click:Connect(c00lkidd_vibes)
+check_player_tools_button.MouseButton1Click:Connect(check_player_tools)
+teleport_player_locally_button.MouseButton1Click:Connect(teleport_specific_player_locally)
+get_platform_button.MouseButton1Click:Connect(make_platform)
+toggle_teleport_troll_button.MouseButton1Click:Connect(toggle_teleport_troll)
+make_players_visible_button.MouseButton1Click:Connect(see_players_through_walls)
