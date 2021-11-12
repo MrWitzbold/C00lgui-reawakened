@@ -1885,7 +1885,8 @@ function fix_players()
 end
 
 function hyperborea_vibes()
-	local decal_ids = {"7976982927", "7976983809", "7256967752", "7976986908", "7977092776"}
+	local sound_ids = {"4771086906", "4261464174", "6901579149", "710874911", "2019245009", "6106346752"}
+	local decal_ids = {"7976982927", "7976983809", "7256967752", "7976986908", "7977092776", "7977092776", "7977092776", "7130906781", "7114753063", "7105927677"}
 	
 	for i,v in pairs(workspace:GetChildren()) do
 		if v:IsA("Sound") then
@@ -1896,14 +1897,8 @@ function hyperborea_vibes()
 	local song = Instance.new("Sound")
 	song.Parent = workspace
 	song.Volume = math.huge
-	song.SoundId = "rbxassetid://4771086906"
-	song.PlaybackSpeed = 1.5
+	song.SoundId = "rbxassetid://" .. sound_ids[math.random(1, #sound_ids)]
 	song.Looped = true
-	
-	local pitch_shift = Instance.new("PitchShiftSoundEffect")
-	pitch_shift.Parent = song
-	pitch_shift.Enabled = true
-	pitch_shift.Octave = 0.665
 	
 	song:Play()
 
@@ -1918,7 +1913,7 @@ function hyperborea_vibes()
 
 	local new_sky = Instance.new("Sky")
 	new_sky.Parent = game.Lighting
-	local skybox_id = decal_ids[math.random(1, 4)]
+	local skybox_id = decal_ids[math.random(1, #decal_ids)]
 	new_sky.SkyboxBk = "http://www.roblox.com/asset/?id=" .. skybox_id
 	skybox_id = decal_ids[math.random(1, 4)]
 	new_sky.SkyboxDn = "http://www.roblox.com/asset/?id=" .. skybox_id
@@ -1938,7 +1933,7 @@ function hyperborea_vibes()
 			if v:IsA("Part") then
 				local random_number = math.random(0, 10)
 				if random_number % 2 == 0 then
-					decal_spam_id = decal_ids[math.random(1, 4)]
+					decal_spam_id = decal_ids[math.random(1, #decal_ids)]
 					local decal1 = Instance.new("Decal")
 					local decal2 = Instance.new("Decal")
 					local decal3 = Instance.new("Decal")
