@@ -591,7 +591,7 @@ c00kidd_vibe_button = Instance.new("TextButton")
 c00kidd_vibe_button.Name = "c00kidd_vibe"
 c00kidd_vibe_button.Parent = page3
 c00kidd_vibe_button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-c00kidd_vibe_button.BorderColor3 = Color3.fromRGB(0, 0, 255)
+c00kidd_vibe_button.BorderColor3 = Color3.fromRGB(255, 0, 127)
 c00kidd_vibe_button.BorderSizePixel = 2
 c00kidd_vibe_button.Position = UDim2.new(0.281, 0, 0.01, 0) -- {0.281, 0},{0.01, 0}
 c00kidd_vibe_button.Size = UDim2.new(0, 110, 0, 38) -- {0, 110},{0, 38}
@@ -658,6 +658,30 @@ make_players_visible_button.Size = UDim2.new(0, 110, 0, 38) -- {0, 110},{0, 38}
 make_players_visible_button.Text = "See players through walls"
 make_players_visible_button.TextColor3 = Color3.fromRGB(255, 255, 255)
 make_players_visible_button.TextScaled = true
+
+fix_players_button = Instance.new("TextButton")
+fix_players_button.Name = "fix_players"
+fix_players_button.Parent = page3
+fix_players_button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+fix_players_button.BorderColor3 = Color3.fromRGB(0, 0, 255)
+fix_players_button.BorderSizePixel = 2
+fix_players_button.Position = UDim2.new(0.281, 0, 0.382, 0) -- {0.281, 0},{0.382, 0}
+fix_players_button.Size = UDim2.new(0, 110, 0, 38) -- {0, 110},{0, 38}
+fix_players_button.Text = "Fix teleported players"
+fix_players_button.TextColor3 = Color3.fromRGB(255, 255, 255)
+fix_players_button.TextScaled = true
+
+hyperborea_vibes_button = Instance.new("TextButton")
+hyperborea_vibes_button.Name = "hyperborea_vibes"
+hyperborea_vibes_button.Parent = page3
+hyperborea_vibes_button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+hyperborea_vibes_button.BorderColor3 = Color3.fromRGB(255, 0, 127)
+hyperborea_vibes_button.BorderSizePixel = 2
+hyperborea_vibes_button.Position = UDim2.new(0.548, 0, 0.382, 0) -- {0.548, 0},{0.382, 0}
+hyperborea_vibes_button.Size = UDim2.new(0, 110, 0, 38) -- {0, 110},{0, 38}
+hyperborea_vibes_button.Text = "Hyperborea vibes"
+hyperborea_vibes_button.TextColor3 = Color3.fromRGB(255, 255, 255)
+hyperborea_vibes_button.TextScaled = true
 
 -- Programming buttons
 
@@ -1842,6 +1866,113 @@ function see_players_through_walls()
 	end
 end
 
+function fix_players()
+	local function iterate_in(object)
+		for i,v in pairs(object:GetChildren()) do
+			wait(0)
+			iterate_in(v)
+			print(v.Name)
+			if v:IsA("Part") then
+				print("Unanchored something")
+				v.Anchored = false
+			end
+		end
+	end
+	
+	for i,v in pairs(game.Players:GetChildren()) do
+		iterate_in(v.Character)
+	end
+end
+
+function hyperborea_vibes()
+	local decal_ids = {"7976982927", "7976983809", "7256967752", "7976986908", "7977092776"}
+	
+	for i,v in pairs(workspace:GetChildren()) do
+		if v:IsA("Sound") then
+			v:Remove()
+		end
+	end
+
+	local song = Instance.new("Sound")
+	song.Parent = workspace
+	song.Volume = math.huge
+	song.SoundId = "rbxassetid://4771086906"
+	song.PlaybackSpeed = 1.5
+	song.Looped = true
+	
+	local pitch_shift = Instance.new("PitchShiftSoundEffect")
+	pitch_shift.Parent = song
+	pitch_shift.Enabled = true
+	pitch_shift.Octave = 0.665
+	
+	song:Play()
+
+	game.Lighting.Ambient = Color3.fromRGB(229, 96, 255)
+	game.Lighting.OutdoorAmbient = Color3.fromRGB(229, 96, 255)
+
+	for i,v in pairs(game.Lighting:GetChildren()) do
+		if v:IsA("Sky") then
+			v:Remove()
+		end
+	end
+
+	local new_sky = Instance.new("Sky")
+	new_sky.Parent = game.Lighting
+	local skybox_id = decal_ids[math.random(1, 4)]
+	new_sky.SkyboxBk = "http://www.roblox.com/asset/?id=" .. skybox_id
+	skybox_id = decal_ids[math.random(1, 4)]
+	new_sky.SkyboxDn = "http://www.roblox.com/asset/?id=" .. skybox_id
+	skybox_id = decal_ids[math.random(1, 4)]
+	new_sky.SkyboxFt = "http://www.roblox.com/asset/?id=" .. skybox_id
+	skybox_id = decal_ids[math.random(1, 4)]
+	new_sky.SkyboxLf = "http://www.roblox.com/asset/?id=" .. skybox_id
+	skybox_id = decal_ids[math.random(1, 4)]
+	new_sky.SkyboxRt = "http://www.roblox.com/asset/?id=" .. skybox_id
+	skybox_id = decal_ids[math.random(1, 4)]
+	new_sky.SkyboxUp = "http://www.roblox.com/asset/?id=" .. skybox_id
+	game.Lighting:SetMinutesAfterMidnight(900)
+
+	local function iterate_in(object)
+		local decal_spam_id = "178993745"
+		for i,v in pairs(object:GetChildren()) do
+			if v:IsA("Part") then
+				local random_number = math.random(0, 10)
+				if random_number % 2 == 0 then
+					decal_spam_id = decal_ids[math.random(1, 4)]
+					local decal1 = Instance.new("Decal")
+					local decal2 = Instance.new("Decal")
+					local decal3 = Instance.new("Decal")
+					local decal4 = Instance.new("Decal")
+					local decal5 = Instance.new("Decal")
+					local decal6 = Instance.new("Decal")
+					decal1.Face = Enum.NormalId.Back
+					decal2.Face = Enum.NormalId.Bottom
+					decal3.Face = Enum.NormalId.Front
+					decal4.Face = Enum.NormalId.Left
+					decal5.Face = Enum.NormalId.Right
+					decal6.Face = Enum.NormalId.Top
+					decal1.Parent = v
+					decal2.Parent = v
+					decal3.Parent = v
+					decal4.Parent = v
+					decal5.Parent = v
+					decal6.Parent = v
+					decal1.Texture = "http://www.roblox.com/asset/?id=" .. decal_spam_id
+					decal2.Texture = "http://www.roblox.com/asset/?id=" .. decal_spam_id
+					decal3.Texture = "http://www.roblox.com/asset/?id=" .. decal_spam_id
+					decal4.Texture = "http://www.roblox.com/asset/?id=" .. decal_spam_id
+					decal5.Texture = "http://www.roblox.com/asset/?id=" .. decal_spam_id
+					decal6.Texture = "http://www.roblox.com/asset/?id=" .. decal_spam_id
+				end
+			end
+			wait(0)
+			iterate_in(v)
+		end
+	end
+
+	iterate_in(workspace)
+end
+
 show_hide_button.MouseButton1Click:Connect(show_hide_gui)
 select_part_button.MouseButton1Click:Connect(select_part) -- page 1
 pager1_anchor_part_button.MouseButton1Click:Connect(anchor_part)
@@ -1882,3 +2013,5 @@ teleport_player_locally_button.MouseButton1Click:Connect(teleport_specific_playe
 get_platform_button.MouseButton1Click:Connect(make_platform)
 toggle_teleport_troll_button.MouseButton1Click:Connect(toggle_teleport_troll)
 make_players_visible_button.MouseButton1Click:Connect(see_players_through_walls)
+fix_players_button.MouseButton1Click:Connect(fix_players)
+hyperborea_vibes_button.MouseButton1Click:Connect(hyperborea_vibes)
