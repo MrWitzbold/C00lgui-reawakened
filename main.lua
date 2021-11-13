@@ -684,17 +684,17 @@ hyperborea_vibes_button.Text = "Hyperborea vibes"
 hyperborea_vibes_button.TextColor3 = Color3.fromRGB(255, 255, 255)
 hyperborea_vibes_button.TextScaled = true
 
-remove_anti_cheats_button = Instance.new("TextButton")
-remove_anti_cheats_button.Name = "remove_anti_cheats"
-remove_anti_cheats_button.Parent = page3
-remove_anti_cheats_button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-remove_anti_cheats_button.BorderColor3 = Color3.fromRGB(255, 0, 0)
-remove_anti_cheats_button.BorderSizePixel = 2
-remove_anti_cheats_button.Position = UDim2.new(0.014, 0, 0.576, 0) -- {0.014, 0},{0.576, 0}
-remove_anti_cheats_button.Size = UDim2.new(0, 110, 0, 38) -- {0, 110},{0, 38}
-remove_anti_cheats_button.Text = "Remove some anti-cheats"
-remove_anti_cheats_button.TextColor3 = Color3.fromRGB(255, 255, 255)
-remove_anti_cheats_button.TextScaled = true
+sing_watamote_opening_button = Instance.new("TextButton")
+sing_watamote_opening_button.Name = "sing_watamote_opening"
+sing_watamote_opening_button.Parent = page3
+sing_watamote_opening_button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+sing_watamote_opening_button.BorderColor3 = Color3.fromRGB(255, 0, 0)
+sing_watamote_opening_button.BorderSizePixel = 2
+sing_watamote_opening_button.Position = UDim2.new(0.014, 0, 0.576, 0) -- {0.014, 0},{0.576, 0}
+sing_watamote_opening_button.Size = UDim2.new(0, 110, 0, 38) -- {0, 110},{0, 38}
+sing_watamote_opening_button.Text = "Toggle watamote opening"
+sing_watamote_opening_button.TextColor3 = Color3.fromRGB(255, 255, 255)
+sing_watamote_opening_button.TextScaled = true
 
 -- Programming buttons
 
@@ -1981,49 +1981,127 @@ function hyperborea_vibes()
 	iterate_in(workspace)
 end
 
-function remove_anti_cheats()
-	-- ACS anti cheat
-	local function iterate_in_players(object)
-		for i,v in pairs(object:GetChildren()) do
-			if v.Name:lower():match("acs") then
-				v:Remove()
+function sing_watamote_opening()
+	if chat_troll_active.Value == true then
+		chat_troll_active.Value = false
+	else
+		chat_troll_active.Value = true
+	end
+	
+	local lyrics = {"When I try",
+		"To speak with anyone,",
+		"I can't find words",
+		"And I run.",
+		"Am I dull?",
+		"Day after day",
+		"I am walking home solo.",
+		"People I meet,",
+		"I can't even say hello.",
+		"Though I admit",
+		"That my current life is dull,",
+		"You'll see!",
+		"Kuroki's day will come!",
+		"Research I did",
+		"On the net just went so far.",
+		"It's been so long",
+		"Since I've even talked to BLARG!",
+		"Rain, snow, or shine",
+		"I am stuck on the default.",
+		"I swear!",
+		"It's everybody else's fault!",
+		"Who cares if my time's all free?",
+		"Who cares whether boys like me?",
+		"Just a bit of work you'll see",
+		"Super popular me!",
+		"Hey mirror mirror on the wall,",
+		"Tell me true or you’ll get smashed!",
+		"If I do all your dreams will be dashed.",
+		"Hey mirror mirror on the wall,",
+		"Maybe I don’t want to hear!",
+		"It’s the truth that you fear.",
+		"Hey mirror, mirror on the wall,",
+		"What about my inner self!",
+		"Such a lie that you tell to yourself.",
+		"Hey mirror, mirror on the wall,",
+		"When I take a look myself,",
+		"All I see is my sad self.",
+		"Every day",
+		"Is like the day before.",
+		"I just don't know",
+		"Anymore.",
+		"I’m so dull.",
+		"Talk to myself, talk to myself, talking talking no end in view.",
+		"Who can I talk, who can I talk, who is there to talk to?",
+		"All alone, all alone, alone it’s such a joke.",
+		"Nightmare, it’s past time I awoke.",
+		"Playing alone, playing alone, playing playing solo game.",
+		"Who is there, who is there, just who is there to blame?",
+		"All alone, all alone, alone is my default.",
+		"I swear, it’s got to be someone’s fault!",
+		"Worm turns into butterfly.",
+		"Won’t I too if I try?",
+		"Keeping that goal in view,",
+		"I’ll be popular too!",
+		"Oh, morning glory, won’t you watch me",
+		"While I’m flying on the wing!",
+		"Really doubt you will do a damn thing.",
+		"The morning sunshine cheers me on",
+		"As higher in the sky I climb!",
+		"What a waste of the sun’s time.",
+		"The next day",
+		"Will bring a change I feel.",
+		"Yeah, it’s a dream,",
+		"It’s not real.",
+		"Life’s so dull!",
+		"But I try",
+		"To speak and I’m a mess.",
+		"Anyone",
+		"Hearing could care less.",
+		"Talking to",
+		"The mirror on the wall.",
+		"Mirror, dear,",
+		"Please listen to it all.",
+		"A butterfly",
+		"From a lowly bug.",
+		"Sorry, dear,",
+		"A slug is still a slug.",
+		"Tomorrow’s me",
+		"Will be completely new.",
+		"Will too!",
+		"Hey mirror mirror on the wall,",
+		"Tell me true or you’ll get smashed!",
+		"If I do all your dreams will be dashed.",
+		"Hey mirror mirror on the wall,",
+		"Maybe I don’t want to hear!",
+		"It’s the truth that you fear.",
+		"Hey mirror, mirror on the wall,",
+		"What about my inner self!",
+		"Such a lie that you tell to yourself.",
+		"Hey mirror, mirror on the wall,",
+		"When I take a look myself,",
+		"All I see is my sad self.",
+		"Every day",
+		"Is like the day before.",
+		"I just don't know",
+		"Anymore.",
+		"I’m so dull."}
+	
+	local function say(thing)
+		game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(thing, "All")
+	end
+	
+	while chat_troll_active.Value == true do
+		for i,v in pairs(lyrics) do
+			if chat_troll_active.Value == false then
+				break
 			end
-			wait(0)
-			iterate_in_players(v)
+			say(v)
+			wait(3)
 		end
 	end
-	iterate_in_players(game.Players.LocalPlayer)
-	iterate_in_players(game.Players.LocalPlayer.Character)
-	iterate_in_players(game.ReplicatedStorage)
-	
-	local fake_acs_engine = Instance.new("Configuration")
-	fake_acs_engine.Name = "ACS_Engine"
-	fake_acs_engine.Parent = game.ReplicatedStorage
-	local fake_folder = Instance.new("Folder")
-	fake_folder.Name = "Events"
-	local fake_event = Instance.new("BindableEvent")
-	fake_event.Parent = fake_folder
-	fake_folder.Parent = fake_acs_engine
-	
-	local fake_head_rot = Instance.new("BindableEvent")
-	fake_head_rot.Name = "HeadRot"
-	fake_head_rot.Parent = fake_folder
-	
-	local fake_acs_client = Instance.new("Configuration")
-	fake_acs_engine.Name = "ACS_Client"
-	fake_acs_engine.Parent = game.Players.LocalPlayer.Character
-	
-	game.Players.LocalPlayer.Character.PlayerScripts.RbxCharacterSounds:Remove()
-	game.Players.LocalPlayer.PlayerScripts.RbxCharacterSounds:Remove()
-	
-	local fake_character_sounds1 = Instance.new("LocalScript")
-	fake_character_sounds1.Name = "RbxCharacterSounds"
-	fake_character_sounds1.Parent = game.Players.LocalPlayer.Character
-	
-	local fake_character_sounds2 = Instance.new("LocalScript")
-	fake_character_sounds2.Name = "RbxCharacterSounds"
-	fake_character_sounds2.Parent = game.Players.LocalPlayer
 end
+
+
 
 show_hide_button.MouseButton1Click:Connect(show_hide_gui)
 select_part_button.MouseButton1Click:Connect(select_part) -- page 1
@@ -2067,4 +2145,4 @@ toggle_teleport_troll_button.MouseButton1Click:Connect(toggle_teleport_troll)
 make_players_visible_button.MouseButton1Click:Connect(see_players_through_walls)
 fix_players_button.MouseButton1Click:Connect(fix_players)
 hyperborea_vibes_button.MouseButton1Click:Connect(hyperborea_vibes)
-remove_anti_cheats_button.MouseButton1Click:Connect(remove_anti_cheats)
+sing_watamote_opening_button.MouseButton1Click:Connect(sing_watamote_opening)
