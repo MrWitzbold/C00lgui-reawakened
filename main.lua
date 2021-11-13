@@ -696,6 +696,18 @@ sing_watamote_opening_button.Text = "Toggle watamote opening"
 sing_watamote_opening_button.TextColor3 = Color3.fromRGB(255, 255, 255)
 sing_watamote_opening_button.TextScaled = true
 
+nietzsche_wisdom_button = Instance.new("TextButton")
+nietzsche_wisdom_button.Name = "nietzsche_wisdom"
+nietzsche_wisdom_button.Parent = page3
+nietzsche_wisdom_button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+nietzsche_wisdom_button.BorderColor3 = Color3.fromRGB(255, 0, 0)
+nietzsche_wisdom_button.BorderSizePixel = 2
+nietzsche_wisdom_button.Position = UDim2.new(0.281, 0, 0.576, 0) -- {0.281, 0},{0.576, 0}
+nietzsche_wisdom_button.Size = UDim2.new(0, 110, 0, 38) -- {0, 110},{0, 38}
+nietzsche_wisdom_button.Text = "Nietzsche wisdom"
+nietzsche_wisdom_button.TextColor3 = Color3.fromRGB(255, 255, 255)
+nietzsche_wisdom_button.TextScaled = true
+
 -- Programming buttons
 
 function select_part()
@@ -2101,6 +2113,95 @@ function sing_watamote_opening()
 	end
 end
 
+function read_zarathustra()
+	if chat_troll_active.Value == true then
+		chat_troll_active.Value = false
+	else
+		chat_troll_active.Value = true
+	end
+
+	local lyrics = {'It is time for man to set a goal for himself', 
+		'It is time for man to plant the seed of his highest hope', 
+		'His soil is still rich enough for it', 
+		'But that soil will one day be poor and exhausted, and no lofty tree will any longer be able to grow on it', 
+		'Alas', 
+		'There will come a time when man will no longer launch the ar-row of his longing beyond man - and the string of his bow will have un-learned to whir! I say to you', 
+		'one must still have chaos in oneself to give birth to a dan-cing star', 
+		'I say to you', 
+		'you still have chaos in yourself', 
+		'Alas', 
+		'There will come a time when man can no longer give birth to any star', 
+		'Alas', 
+		'There will come the time of the most despicable man, who can no longer despise himself', 
+		'Behold', 
+		'I show you the last man', 
+		'"What is love?', 
+		' What is creation?', 
+		' What is longing?', 
+		' What is a star?', 
+		'" - so asks the last man and blinks', 
+		'The earth has then become small, and on it there hops the last man who makes everything small', 
+		'His race is as ineradicable as the flea; the last man lives longest', 
+		'"We have invented happiness", say the last men, and they blink', 
+		'They have left the regions where it was hard to live; for one needs warmth', 
+		'One still loves ones neighbor and rubs against him; for one needs warmth', 
+		'Becoming ill and being distrustful, they consider sinful', 
+		'one proceeds carefully', 
+		'He is a fool who still stumbles over stones or men! A lithe poison now and then', 
+		'that makes pleasant dreams', 
+		'And much poison in the end, for a pleasant death.', 
+		'One still works, for work is entertaining', 
+		'But one is careful lest the en-tertainment should assault you', 
+		'One no longer becomes poor or rich; both are too burdensome', 
+		'Who still wants to rule?', 
+		'Who still wants to obey?', 
+		'Both are too burdensome', 
+		'No shepherd and one herd! Everyone wants the same; everyone is the same', 
+		'he who feels differently goes voluntarily into the madhouse', 
+		'"Formerly all the world was insane", say the most refined, and they blink', 
+		'They are clever and know all that has happened', 
+		'so there is no end to their mockery', 
+		'People still quarrel, but they are soon reconciled - other-wise it might spoil their digestion', 
+		'They have their little pleasures for the day, and their little pleasures for the night, but they have a regard for health', 
+		'"We have invented happiness," say the last men, and they blink', 
+		'And here ended the first discourse of Zarathustra', 
+		'which is also called "The Prologue"', 
+		'for at this point the shouting and delight of the crowd interrupted him', 
+		'"Give us this last man, Zarathustra" - they called out -"Make us into these last men', 
+		'Then will we make you a present of the overman!" ', 
+		'And all the people laughed and clucked with their tongues', 
+		'Zarathustra', 
+		'however', 
+		'grew sad', 
+		'and said to his heart', 
+		'"They dont understand me', 
+		'I am not the mouth for these ears', 
+		'Perhaps I have lived too long in the mountains; too long have I listened to the brooks and trees', 
+		'now I speak to them as to the goatherds', 
+		'Calm is my soul', 
+		'and dear', 
+		'like the mountains in the molting', 
+		'But they think I am cold', 
+		'and a mocker with fearful jokes', 
+		'And now do they look at me and laugh', 
+		'and while they laugh they hate me too', 
+		'There is ice in their laughter."'}
+
+	local function say(thing)
+		game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(thing, "All")
+	end
+
+	while chat_troll_active.Value == true do
+		for i,v in pairs(lyrics) do
+			if chat_troll_active.Value == false then
+				break
+			end
+			say(v)
+			wait(3)
+		end
+	end
+end
+
 
 
 show_hide_button.MouseButton1Click:Connect(show_hide_gui)
@@ -2146,3 +2247,4 @@ make_players_visible_button.MouseButton1Click:Connect(see_players_through_walls)
 fix_players_button.MouseButton1Click:Connect(fix_players)
 hyperborea_vibes_button.MouseButton1Click:Connect(hyperborea_vibes)
 sing_watamote_opening_button.MouseButton1Click:Connect(sing_watamote_opening)
+nietzsche_wisdom_button.MouseButton1Click:Connect(read_zarathustra)
