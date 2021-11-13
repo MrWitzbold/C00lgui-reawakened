@@ -49,7 +49,7 @@ current_page.Value = 1
 max_page = Instance.new("IntValue")
 max_page.Name = "max_page"
 max_page.Parent = main_frame
-max_page.Value = 3
+max_page.Value = 4
 
 selected_part_value = Instance.new("ObjectValue")
 selected_part_value.Name = "selected_part"
@@ -707,6 +707,53 @@ nietzsche_wisdom_button.Size = UDim2.new(0, 110, 0, 38) -- {0, 110},{0, 38}
 nietzsche_wisdom_button.Text = "Nietzsche wisdom"
 nietzsche_wisdom_button.TextColor3 = Color3.fromRGB(255, 255, 255)
 nietzsche_wisdom_button.TextScaled = true
+
+-- Page 4
+
+page4 = Instance.new("Frame")
+page4.Name = "page4"
+page4.Parent = pages_folder
+page4.BackgroundTransparency = 1
+page4.Position = UDim2.new(0, 14, 0.495, 0) -- {0, 14},{0.495, 0}
+page4.Size = UDim2.new(0, 438, 0, 229) -- {0, 438},{0, 229}
+page4.Visible = false
+
+remote_input_textbox = Instance.new("TextBox")
+remote_input_textbox.Name = "remote_input_textbox"
+remote_input_textbox.Parent = page4
+remote_input_textbox.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+remote_input_textbox.BorderColor3 = Color3.fromRGB(255, 0, 0)
+remote_input_textbox.BorderSizePixel = 1
+remote_input_textbox.Position = UDim2.new(0.001, 0, 0, 0) -- {0.001, 0},{0, 0}
+remote_input_textbox.Size = UDim2.new(0, 355, 0, 172) -- {0, 355},{0, 172}
+remote_input_textbox.TextColor3 = Color3.fromRGB(255, 255, 255)
+remote_input_textbox.TextScaled = true
+remote_input_textbox.Text = "When firing a remote, keep only the path of the remote in this box"
+remote_input_textbox.ClearTextOnFocus = false
+
+get_remotes_button = Instance.new("TextButton")
+get_remotes_button.Name = "get_remotes"
+get_remotes_button.Parent = page4
+get_remotes_button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+get_remotes_button.BorderColor3 = Color3.fromRGB(255, 0, 0)
+get_remotes_button.BorderSizePixel = 2
+get_remotes_button.Position = UDim2.new(0.014, 0, 0.782, 0) -- {0.014, 0},{0.782, 0}
+get_remotes_button.Size = UDim2.new(0, 120, 0, 38) -- {0, 120},{0, 36}
+get_remotes_button.Text = "Get remotes"
+get_remotes_button.TextColor3 = Color3.fromRGB(255, 255, 255)
+get_remotes_button.TextScaled = true
+
+fire_remote_button = Instance.new("TextButton")
+fire_remote_button.Name = "fire_remote"
+fire_remote_button.Parent = page4
+fire_remote_button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+fire_remote_button.BorderColor3 = Color3.fromRGB(255, 0, 0)
+fire_remote_button.BorderSizePixel = 2
+fire_remote_button.Position = UDim2.new(0.309, 0, 0.782, 0) -- {0.309, 0},{0.782, 0}
+fire_remote_button.Size = UDim2.new(0, 217, 0, 36) -- {0, 217},{0, 36}
+fire_remote_button.Text = "Fire remote"
+fire_remote_button.TextColor3 = Color3.fromRGB(255, 255, 255)
+fire_remote_button.TextScaled = true
 
 -- Programming buttons
 
@@ -2202,6 +2249,45 @@ function read_zarathustra()
 	end
 end
 
+function get_remotes()
+	remote_input_textbox.Text = ""
+	amount_of_remotes = 0
+	local function iterate_in(object)
+		for i,v in pairs(object:GetChildren()) do
+			if v:IsA("RemoteEvent") or v:IsA("BindableEvent") then
+				if amount_of_remotes == 0 then
+					remote_input_textbox.Text = remote_input_textbox.Text .. v:GetFullName()
+				else
+					remote_input_textbox.Text = remote_input_textbox.Text .. ", " .. v:GetFullName()
+				end
+
+				amount_of_remotes += 1
+			end
+			
+			wait(0)
+			iterate_in(v)
+		end
+	end
+	
+	iterate_in(game)
+end
+
+function fire_remote()
+	local function GetObject(fullName)
+		local segments = fullName:split(".")
+		local current = game
+
+		for _,location in pairs(segments) do
+			current = current[location]
+		end
+
+		return current
+	end
+	
+	local remote_path = remote_input_textbox.Text
+	local remote = GetObject(remote_path)
+end
+
 
 
 show_hide_button.MouseButton1Click:Connect(show_hide_gui)
@@ -2248,3 +2334,5 @@ fix_players_button.MouseButton1Click:Connect(fix_players)
 hyperborea_vibes_button.MouseButton1Click:Connect(hyperborea_vibes)
 sing_watamote_opening_button.MouseButton1Click:Connect(sing_watamote_opening)
 nietzsche_wisdom_button.MouseButton1Click:Connect(read_zarathustra)
+get_remotes_button.MouseButton1Click:Connect(get_remotes)
+fire_remote_button.MouseButton1Click:Connect(fire_remote)
