@@ -684,6 +684,18 @@ hyperborea_vibes_button.Text = "Hyperborea vibes"
 hyperborea_vibes_button.TextColor3 = Color3.fromRGB(255, 255, 255)
 hyperborea_vibes_button.TextScaled = true
 
+remove_anti_cheats_button = Instance.new("TextButton")
+remove_anti_cheats_button.Name = "remove_anti_cheats"
+remove_anti_cheats_button.Parent = page3
+remove_anti_cheats_button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+remove_anti_cheats_button.BorderColor3 = Color3.fromRGB(255, 0, 0)
+remove_anti_cheats_button.BorderSizePixel = 2
+remove_anti_cheats_button.Position = UDim2.new(0.014, 0, 0.576, 0) -- {0.014, 0},{0.576, 0}
+remove_anti_cheats_button.Size = UDim2.new(0, 110, 0, 38) -- {0, 110},{0, 38}
+remove_anti_cheats_button.Text = "Remove some anti-cheats"
+remove_anti_cheats_button.TextColor3 = Color3.fromRGB(255, 255, 255)
+remove_anti_cheats_button.TextScaled = true
+
 -- Programming buttons
 
 function select_part()
@@ -1969,6 +1981,50 @@ function hyperborea_vibes()
 	iterate_in(workspace)
 end
 
+function remove_anti_cheats()
+	-- ACS anti cheat
+	local function iterate_in_players(object)
+		for i,v in pairs(object:GetChildren()) do
+			if v.Name:lower():match("acs") then
+				v:Remove()
+			end
+			wait(0)
+			iterate_in_players(v)
+		end
+	end
+	iterate_in_players(game.Players.LocalPlayer)
+	iterate_in_players(game.Players.LocalPlayer.Character)
+	iterate_in_players(game.ReplicatedStorage)
+	
+	local fake_acs_engine = Instance.new("Configuration")
+	fake_acs_engine.Name = "ACS_Engine"
+	fake_acs_engine.Parent = game.ReplicatedStorage
+	local fake_folder = Instance.new("Folder")
+	fake_folder.Name = "Events"
+	local fake_event = Instance.new("BindableEvent")
+	fake_event.Parent = fake_folder
+	fake_folder.Parent = fake_acs_engine
+	
+	local fake_head_rot = Instance.new("BindableEvent")
+	fake_head_rot.Name = "HeadRot"
+	fake_head_rot.Parent = fake_folder
+	
+	local fake_acs_client = Instance.new("Configuration")
+	fake_acs_engine.Name = "ACS_Client"
+	fake_acs_engine.Parent = game.Players.LocalPlayer.Character
+	
+	game.Players.LocalPlayer.Character.PlayerScripts.RbxCharacterSounds:Remove()
+	game.Players.LocalPlayer.PlayerScripts.RbxCharacterSounds:Remove()
+	
+	local fake_character_sounds1 = Instance.new("LocalScript")
+	fake_character_sounds1.Name = "RbxCharacterSounds"
+	fake_character_sounds1.Parent = game.Players.LocalPlayer.Character
+	
+	local fake_character_sounds2 = Instance.new("LocalScript")
+	fake_character_sounds2.Name = "RbxCharacterSounds"
+	fake_character_sounds2.Parent = game.Players.LocalPlayer
+end
+
 show_hide_button.MouseButton1Click:Connect(show_hide_gui)
 select_part_button.MouseButton1Click:Connect(select_part) -- page 1
 pager1_anchor_part_button.MouseButton1Click:Connect(anchor_part)
@@ -2011,3 +2067,4 @@ toggle_teleport_troll_button.MouseButton1Click:Connect(toggle_teleport_troll)
 make_players_visible_button.MouseButton1Click:Connect(see_players_through_walls)
 fix_players_button.MouseButton1Click:Connect(fix_players)
 hyperborea_vibes_button.MouseButton1Click:Connect(hyperborea_vibes)
+remove_anti_cheats_button.MouseButton1Click:Connect(remove_anti_cheats)
