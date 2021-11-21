@@ -49,7 +49,7 @@ current_page.Value = 1
 max_page = Instance.new("IntValue")
 max_page.Name = "max_page"
 max_page.Parent = main_frame
-max_page.Value = 4
+max_page.Value = 5
 
 selected_part_value = Instance.new("ObjectValue")
 selected_part_value.Name = "selected_part"
@@ -66,6 +66,10 @@ chat_troll_active.Value = false
 teleport_troll_active = Instance.new("BoolValue")
 teleport_troll_active.Parent = main_frame
 teleport_troll_active.Value = false
+
+loop_fire_remote_active = Instance.new("BoolValue")
+loop_fire_remote_active.Parent = main_frame
+loop_fire_remote_active.Value = false
 
 teleport_player_locally_offset = 5
 
@@ -755,6 +759,30 @@ fire_remote_button.Text = "Fire remote"
 fire_remote_button.TextColor3 = Color3.fromRGB(255, 255, 255)
 fire_remote_button.TextScaled = true
 
+-- page 5
+
+page5 = Instance.new("Frame")
+page5.Name = "page5"
+page5.Parent = pages_folder
+page5.BackgroundTransparency = 1
+page5.Position = UDim2.new(0, 14, 0.495, 0) -- {0, 14},{0.495, 0}
+page5.Size = UDim2.new(0, 438, 0, 229) -- {0, 438},{0, 229}
+page5.Visible = false
+
+toggle_loop_fire_remote_button = Instance.new("TextButton")
+toggle_loop_fire_remote_button.Name = "toggle_loop_fire_remote"
+toggle_loop_fire_remote_button.Parent = page5
+toggle_loop_fire_remote_button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+toggle_loop_fire_remote_button.BorderColor3 = Color3.fromRGB(255, 0, 0)
+toggle_loop_fire_remote_button.BorderSizePixel = 2
+toggle_loop_fire_remote_button.Position = UDim2.new(0.014, 0, 0.01, 0) -- {0.014, 0},{0.01, 0}
+toggle_loop_fire_remote_button.Size = UDim2.new(0, 110, 0, 38) -- {0, 110},{0, 38}
+toggle_loop_fire_remote_button.Text = "Toggle loop fire remote"
+toggle_loop_fire_remote_button.TextColor3 = Color3.fromRGB(255, 255, 255)
+toggle_loop_fire_remote_button.TextScaled = true
+
+
+
 -- Programming buttons
 
 function select_part()
@@ -1415,6 +1443,7 @@ function spawn_UFO()
 	head_attachment.Name = "UFO_attachment"
 	
 	local UFO = Instance.new("Part")
+	UFO.Name = "UFO"
 	UFO.Parent = game.Players.LocalPlayer.Character
 	UFO.Shape = Enum.PartType.Cylinder
 	UFO.Size = Vector3.new(1, 0.5, 0.5)
@@ -1426,6 +1455,12 @@ function spawn_UFO()
 	UFO.TopSurface = Enum.SurfaceType.Smooth
 	UFO.Color = Color3.fromRGB(255, 255, 255)
 	UFO.CanCollide = false
+	
+	local selectionbox = Instance.new("SelectionBox")
+	selectionbox.Parent = UFO
+	selectionbox.Adornee = UFO
+	selectionbox.LineThickness = 0.01
+	selectionbox.Color3 = Color3.fromRGB(0, 255, 85)
 	
 	local UFO_attachment = Instance.new("Attachment")
 	UFO_attachment.Parent = UFO
@@ -1894,9 +1929,9 @@ end
 
 function toggle_teleport_troll()
 	if teleport_troll_active.Value == true then
-		teleport_troll_active = false
+		teleport_troll_active.Value = false
 	else
-		teleport_troll_active = true
+		teleport_troll_active.Value = true
 	end
 	
 	while teleport_troll_active.Value == true do
@@ -2286,7 +2321,37 @@ function fire_remote()
 	
 	local remote_path = remote_input_textbox.Text
 	local remote = GetObject(remote_path)
+	remote:FireServer()
 end
+
+function toggle_loop_fire_remote()
+	if loop_fire_remote_active.Value == true then
+		loop_fire_remote_active.Value = false
+	else
+		loop_fire_remote_active.Value = true
+	end
+	
+	local function GetObject(fullName)
+		local segments = fullName:split(".")
+		local current = game
+
+		for _,location in pairs(segments) do
+			current = current[location]
+		end
+
+		return current
+	end
+
+	local remote_path = remote_input_textbox.Text
+	local remote = GetObject(remote_path)
+	
+	while loop_fire_remote_active.Value == true do
+		remote:FireServer()
+		wait(0.01)
+	end
+end
+
+
 
 
 
@@ -2336,3 +2401,4 @@ sing_watamote_opening_button.MouseButton1Click:Connect(sing_watamote_opening)
 nietzsche_wisdom_button.MouseButton1Click:Connect(read_zarathustra)
 get_remotes_button.MouseButton1Click:Connect(get_remotes)
 fire_remote_button.MouseButton1Click:Connect(fire_remote)
+toggle_loop_fire_remote_button.MouseButton1Click:Connect(toggle_loop_fire_remote)
